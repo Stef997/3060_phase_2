@@ -4,11 +4,7 @@
  * session
  */
 
-#include <string>
-#include <iostream>
 #include "adminUser.h"
-
-using namespace std;
 
 AdminUser::AdminUser() {
     string* accounts = new string[1]{"none"};

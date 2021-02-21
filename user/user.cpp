@@ -3,11 +3,7 @@
  * bank session within an ATM banking system.
  */
 
-#include <string> 
-#include <iostream>
 #include "user.h"
-
-using namespace std;
 
 //TODO: Create the account class for all bank accounts
 //Used to store the accounts being accessed by the
