@@ -8,6 +8,7 @@
 #include "../user/user.h"
 #include "../user/standardUser.h"
 #include "../user/adminUser.h"
+#include "../deposit/deposit.h"
 #include <string>
 
 using namespace std;

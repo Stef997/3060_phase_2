@@ -27,6 +27,7 @@ User BankTransaction::getUser() {
 
 bool BankTransaction::startTransaction(User username, string actionName) {
     string loginName;
+    bool isDeposited;
 
     string transactionStr[10] = {"login", "logout",
            "withdrawal", "transfer", "paybill", "deposit",
@@ -63,7 +64,7 @@ bool BankTransaction::startTransaction(User username, string actionName) {
                            cout << "Paybill not implemented" << endl;
                            break;
                         case 5:
-                           cout << "Deposit not implemented" << endl;
+                           isDeposited = Deposit().startTransaction(user);
                            break;
                         case 6:
                            cout << "Create not implemented" << endl;

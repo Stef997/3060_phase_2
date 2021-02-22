@@ -62,7 +62,7 @@ string Login::startTransaction() {
     bool isAdminUser = isAdmin(sessionType);
        
     if(isAdminUser == false) {
-        cout << "Please enter account holder's name: " << endl;
+        cout << "Please enter account holder's name: ";
         cin >> username;
         bool isValid = isValidName(username);
         if(isValid) {

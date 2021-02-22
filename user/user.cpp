@@ -19,10 +19,10 @@ Account* User::getBankAccounts() {
 
 //TODO: Add a bank account to the current user instance (ROUGH version)
 void User::addAccount(Account account) {
-    int currentSize = sizeof(this->bankAccounts)/sizeof(this->bankAccounts) + 1;
-    Account* newArray = new Account[currentSize + 1];
+    int currentSize = sizeof(bankAccounts)/sizeof(bankAccounts) + 1;
+    Account* newArray = new Account[currentSize];
     for(int i = 0; i < currentSize-1; i++) {
-        newArray[i] = this->bankAccounts[i];
+        newArray[i] = bankAccounts[i];
     }
     newArray[currentSize-1] = account;
     User::setBankAccounts(newArray);

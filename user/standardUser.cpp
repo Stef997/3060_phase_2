@@ -6,13 +6,18 @@
 #include "standardUser.h"
 
 StandardUser::StandardUser(string name) {
-    StandardUser::setAccountName(name);
+    setHoldersName(name);
+    Account account = Account();
+    account.setPlan("none");
+    account.setNumber(1);
+    Account defaultAccount = {account};
+    bankAccounts = &defaultAccount;
 }
 
-string StandardUser::getAccountName() {
-    return accountName;
+string StandardUser::getHoldersName() {
+    return holdersName;
 }
 
-void StandardUser::setAccountName(string newName) {
-    accountName = newName;
+void StandardUser::setHoldersName(string newName) {
+    holdersName = newName;
 }
