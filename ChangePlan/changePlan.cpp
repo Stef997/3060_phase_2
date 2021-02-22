@@ -14,33 +14,25 @@ class ChangePlan {
     }
 
     public: startTransaction(User user){
+        string name;
+        string newName;
+        int bankAccountID;
+        string bankAccountIDString;
+        float amount;
 
+        cout << "Enter Account Holder's Name";
+        cin >> name;
+
+        cout << "Enter The Account Number To Deposit To";
+        cin >> bankAccountID
     }
 
-    //TODO: change int to string in UML
+    
     private: bool isValidAccountNumber(string accountNumber){
 
-        // Check if number is not null
-        if (accountNumber.empty()){
-            return false;
-        }
-
-        // Check if number is 5 characters long
-        if (accountNumber.length() != 5){
-            return false;
-        }
-
-        // Check if number is all integer digits
-        regex regexDigits("[0-9]+");
-        if (!regex_match(accountNumber, regexDigits)){
-            return false;
-        }
-
-        // TODO: Check number exist in the data base
-
-        return true;
+     
     }
-
+        //got from stephan
       private: bool isValidName(string name){
              // Check if name is not null or empty string
         if (name.empty() || name.compare("") == 0){
