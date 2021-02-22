@@ -21,6 +21,10 @@ string BankTransaction::getTransactionName() {
     return name;
 }
 
+User BankTransaction::getUser() {
+    return user;
+}
+
 bool BankTransaction::startTransaction(User username, string actionName) {
     string loginName;
 

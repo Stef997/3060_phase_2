@@ -8,8 +8,8 @@ using namespace std;
 
 class Account { 
     private:
-        int number;
-        float balance;
+        int number = 0;
+        float balance = 0;
         string plan;
     public:
         int getNumber();

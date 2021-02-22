@@ -22,6 +22,7 @@ class BankTransaction {
         BankTransaction(string actionName);
         bool startTransaction(User username, string actionName);
         string getTransactionName();
+        User getUser();
 };
 
 #endif
