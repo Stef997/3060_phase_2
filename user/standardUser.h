@@ -11,7 +11,7 @@ class StandardUser: public User {
     private:
         string accountName;
     public:
-        StandardUser();
+        StandardUser(string name);
         void setAccountName(string newName);
         string getAccountName();
     protected:

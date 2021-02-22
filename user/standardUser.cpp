@@ -5,10 +5,7 @@
 
 #include "standardUser.h"
 
-StandardUser::StandardUser() {
-    string name;
-    cout << "Enter account name: ";
-    cin >> name;
+StandardUser::StandardUser(string name) {
     StandardUser::setAccountName(name);
 }
 

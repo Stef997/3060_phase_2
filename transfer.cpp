@@ -11,7 +11,7 @@ class Transfer {
     
     public: float transfer()
     {
-
+        return 0;
     }
 
     public: bool startTransaction(/*User user*/){
@@ -65,6 +65,7 @@ class Transfer {
            transfer(amount)
        }
        */
+       return false;
     }
 
     //TODO: change int to string in UML

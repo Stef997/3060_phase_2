@@ -10,7 +10,7 @@ void BankSession::promptTransaction() {
     cout << "Enter Transaction: " << endl;
     cin >> actionName;
     BankTransaction transaction = BankTransaction(actionName);
-    transaction.startTransaction(user);
+    transaction.startTransaction(transaction.getTransactionName());
 }
 
 BankSession::BankSession() {

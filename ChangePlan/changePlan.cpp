@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
 #include <regex>
-#include "user.h"
+#include "../user/user.h"
+
 using namespace std;
 
 class ChangePlan {
@@ -9,11 +10,11 @@ class ChangePlan {
 
     }
 
-    public: setPlan(string plan){
+    public: void setPlan(string plan){
 
     }
 
-    public: startTransaction(User user){
+    public: void startTransaction(User user){
         string name;
         string newName;
         int bankAccountID;
@@ -24,13 +25,13 @@ class ChangePlan {
         cin >> name;
 
         cout << "Enter The Account Number To Deposit To";
-        cin >> bankAccountID
+        cin >> bankAccountID;
     }
 
     
     private: bool isValidAccountNumber(string accountNumber){
 
-     
+     return false;
     }
         //got from stephan
       private: bool isValidName(string name){
