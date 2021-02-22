@@ -5,6 +5,10 @@
 #include <string>
 #include <regex>
 
+#include "../user/user.h"
+#include "../user/adminUser.h"
+#include "../user/standardUser.h"
+
 using namespace std;
 
 class PayBill {
@@ -19,10 +23,10 @@ class PayBill {
         bool isValidName(string name);
         bool isValidAccountNumber(string number);
         bool isValidCompany(string company);
-        bool isValidAmount(float amount);
+        bool isValidAmount(string amount);
     public:
         PayBill();
-        void startTransaction();
+        void startTransaction(User user);
         void payBill(float amount); // TODO: This should be changed to private
 
 };

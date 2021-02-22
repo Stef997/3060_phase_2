@@ -4,13 +4,13 @@ PayBill::PayBill(){
 
 }
 
-void PayBill::startTransaction(/*User user*/)
+void PayBill::startTransaction(User user)
 {
     string name;
-    int bankAccountID;
+    string bankAccountID;
     string bankAccountIDString;
     string companyName;
-    float amount;
+    string amount;
 
     /* TODO: Implement user and check privilege
     if (user == admin){
@@ -22,36 +22,28 @@ void PayBill::startTransaction(/*User user*/)
     }
     */
     
-    /* TODO: Add enter user id in test code
-    cout << ""
-    cin >> bankAccountID
-    */
+    cout << "Enter account number to pay bill from:";
+    cin >> bankAccountID;
 
-    /* TODO: Add enter user company name
-    cout << "Enter the company to pay the bill to"
-    cin >> companyName
-    */
+    cout << "Enter the company to pay the bill to:";
+    cin >> companyName;
 
-    /* TODO: implement an error handler for int/float values
     cout << "Enter amount to pay:";
     cin >> amount;
-    */
 
-    // TODO: Implement a way to add 0 preceding id proceeding 5 digits
+    // TODO: Implement a way to add 0 preceding id proceeding 5 digits and account number
 
-    /* TODO: Add functionality, fix validity checkers, return types, and add error messages
     if (!isValidAccountNumber(bankAccountIDString)){
-
+        cout << "" << endl;
     } else if(!isValidName(name)){
 
     } else if(!isValidCompany(companyName)){
-
+        cout << "" << endl;
     } else if(!isValidAmount(amount)){
-        
+        cout << "ERROR: Value Error - Account name does not exist!" << endl;
     } else{
-        payBill(amount)
+        payBill(stof(amount));
     }
-    */ 
 }
 
 //TODO: method should be private
@@ -109,17 +101,33 @@ bool PayBill::isValidName(string name){
 }
 
 // TODO: add user parameter and current balance parameter
-bool PayBill::isValidAmount(float amount){
-    /*if (standard && amount >= 2000){
+bool PayBill::isValidAmount(string amount){
+
+    // Check if number is all integer digits and proper currency float value
+    regex regexDigits("^([$]?[0-9]+[.,]?[0-9]{0,2})$");
+    if (!regex_match(amount, regexDigits)){
+        return false;
+    }
+
+    // Check if amount has $ in front and convert to float value
+    float value;
+    if (amount.substr(0,0).compare("$") == 0){
+        value = stof(amount.substr(1));
+    }
+    else{
+        value = stof(amount);
+    }
+
+    /*if (standard && value >= 2000){
         return false;
     }
     */
     
-    if (amount < 0){
+    if (value < 0){
         return false;
     }
     
-    /*if (amount < balance){
+    /*if (value < balance){
         return false
     }*/
 
