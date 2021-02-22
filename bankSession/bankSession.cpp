@@ -7,10 +7,12 @@
 
 void BankSession::promptTransaction() {
     string actionName;
-    cout << "Enter Transaction: " << endl;
-    cin >> actionName;
-    BankTransaction transaction = BankTransaction(actionName);
-    transaction.startTransaction(transaction.getTransactionName());
+    while(actionName != "logout") {
+        cout << "Enter Transaction: " << endl;
+        cin >> actionName;
+        BankTransaction transaction = BankTransaction(actionName);
+        transaction.startTransaction(User(), transaction.getTransactionName());
+    }
 }
 
 BankSession::BankSession() {

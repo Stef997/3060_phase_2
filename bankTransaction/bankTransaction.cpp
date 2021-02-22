@@ -21,21 +21,30 @@ string BankTransaction::getTransactionName() {
     return name;
 }
 
-bool BankTransaction::startTransaction(string name) {
+bool BankTransaction::startTransaction(User username, string actionName) {
+    string loginName;
+
     string transactionStr[10] = {"login", "logout",
            "withdrawal", "transfer", "paybill", "deposit",
            "create", "delete", "disable", "changeplan"};
 
         for(int i = 0; i < 10; i++) {
-            if(name.length() == transactionStr[i].length()) {
-                bool isAction = equal(name.begin(), name.end(),
+            if(actionName.length() == transactionStr[i].length()) {
+                bool isAction = equal(actionName.begin(), actionName.end(),
                                         transactionStr[i].begin(),
                                         noCaseComp);
 
                 if(isAction) {
                     switch(i) {
                         case 0:
-                           Login().startTransaction();
+                           loginName = Login().startTransaction();
+                           if(loginName != "admin" && loginName != "none") {
+                               user = StandardUser(loginName);
+                           } else if (loginName == "admin") {
+                               user = AdminUser();
+                           } else {
+                               cout << "Error: Not a valid account name";
+                           }
                            break;
                         case 1:
                            cout << "Logout not implemented" << endl;
