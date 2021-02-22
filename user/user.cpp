@@ -8,19 +8,19 @@
 //TODO: Create the account class for all bank accounts
 //Used to store the accounts being accessed by the
 //current user of the session
-void User::setBankAccounts(string* accounts) {
+void User::setBankAccounts(Account* accounts) {
     bankAccounts = accounts;
 }
 
 //Returns the bank accounts belonging to the user
-string* User::getBankAccounts() {
+Account* User::getBankAccounts() {
     return bankAccounts;
 }
 
 //TODO: Add a bank account to the current user instance (ROUGH version)
-void User::addAccount(string account) {
+void User::addAccount(Account account) {
     int currentSize = sizeof(this->bankAccounts)/sizeof(this->bankAccounts) + 1;
-    string* newArray = new string[currentSize + 1];
+    Account* newArray = new Account[currentSize + 1];
     for(int i = 0; i < currentSize-1; i++) {
         newArray[i] = this->bankAccounts[i];
     }

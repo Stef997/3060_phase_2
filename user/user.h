@@ -1,19 +1,20 @@
-#ifndef user_h
-#define user_h
+#ifndef user_h_
+#define user_h_
 
 #include <iostream>
 #include <string>
+#include "../account/account.h"
 
 using namespace std;
 
-class User {
+class User: public Account {
     private:
-        string* bankAccounts;
+        Account* bankAccounts;
 
     public:
-        string* getBankAccounts();
-        void addAccount(string account);
-        void setBankAccounts(string* accounts);
+        Account* getBankAccounts();
+        void addAccount(Account account);
+        void setBankAccounts(Account* accounts);
 };
 
 #endif

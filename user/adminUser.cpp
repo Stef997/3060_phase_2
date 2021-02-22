@@ -5,9 +5,11 @@
  */
 
 #include "adminUser.h"
+#include "../account/account.h"
 
 AdminUser::AdminUser() {
-    string* accounts = new string[1]{"none"};
+    Account account;
+    Account* accounts = new Account[1]{account};
     AdminUser::setBankAccounts(accounts);
 }
 
