@@ -9,11 +9,15 @@ using namespace std;
 
 class StandardUser: public User {
     private:
-        string accountName;
+        Account* bankAccounts;
+        string holdersName;
     public:
+        Account* getBankAccounts();
+        void addAccount(Account account);
+        void setBankAccounts(Account* accounts);
         StandardUser(string name);
-        void setAccountName(string newName);
-        string getAccountName();
+        void setHoldersName(string newName);
+        string getHoldersName();
     protected:
 };
 

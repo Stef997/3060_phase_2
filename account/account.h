@@ -13,6 +13,7 @@ class Account {
         string plan;
     public:
         int getNumber();
+        void setNumber(int newNumber);
         float getBalance();
         string getPlan();
         void setPlan(string newPlan);
