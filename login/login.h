@@ -10,13 +10,13 @@
 
 using namespace std;
 
-class Login : public User {
+class Login {
     private:
         bool isValidName(string name);
         static bool noCaseComp(unsigned char a, unsigned char b);
         bool isAdmin(string session);
     public:
-        User startTransaction();
+        string startTransaction();
         void login(string sessionType);
 
 };

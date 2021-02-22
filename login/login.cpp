@@ -52,7 +52,7 @@ bool Login::isAdmin(string session) {
   return isAdmin;
 }
 
-void Login::startTransaction() {
+string Login::startTransaction() {
     string username;
     string sessionType;
 
@@ -65,9 +65,14 @@ void Login::startTransaction() {
         cout << "Please enter account holder's name: " << endl;
         cin >> username;
         bool isValid = isValidName(username);
+        if(isValid) {
+            return username;
+        }
     } else {
-        cout << "Admin logged in" << endl;
+        return "admin";
     }
+   
+    return "none";
 }
 
 void Login::login(string sessionType) {
