@@ -12,6 +12,9 @@ void BankSession::promptTransaction() {
         cin >> actionName;
         BankTransaction transaction = BankTransaction(actionName);
         transaction.startTransaction(User(), transaction.getTransactionName());
+        if(transaction.getTransactionName() == "login") {
+            user = transaction.getUser();
+        }
     }
 }
 
