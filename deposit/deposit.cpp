@@ -5,7 +5,7 @@
 
 #include "deposit.h"
 
-bool Deposit::startTransaction(User user) {
+bool Deposit::startTransaction(StandardUser user) {
     string holdersName;
     int accountNum;
     float depositAmount;
@@ -14,6 +14,7 @@ bool Deposit::startTransaction(User user) {
 
     cout << "Enter account number: ";
     cin >> accountNum;
+    cout << user.getHoldersName() << endl;
     if(isValidAccountNumber(accountNum, accounts)){
         cout << "Enter deposit amount: ";
         cin >> depositAmount;

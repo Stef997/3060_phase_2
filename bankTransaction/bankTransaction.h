@@ -15,7 +15,7 @@ using namespace std;
 
 class BankTransaction {
     private:
-        User user;
+        StandardUser user;
         string name;
         static bool noCaseComp(unsigned char a, unsigned char b);
     public:
@@ -23,7 +23,7 @@ class BankTransaction {
         BankTransaction(string actionName);
         bool startTransaction(User username, string actionName);
         string getTransactionName();
-        User getUser();
+        StandardUser getUser();
 };
 
 #endif
