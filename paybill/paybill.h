@@ -8,28 +8,19 @@
 #include "../user/user.h"
 #include "../user/adminUser.h"
 #include "../user/standardUser.h"
+#include "../transaction/transaction.h"
 
 using namespace std;
 
-class PayBill {
-    // Attributes
-    private:
-
-    public:
-
-
+class PayBill: public Transaction{
     // Methods
     private:
-        bool isValidName(string name);
-        bool isValidAccountNumber(string number);
         bool isValidCompany(string company);
         bool isValidAmount(string amount);
     public:
         PayBill();
-        void startTransaction(User user);
+        bool startTransaction(User user);
         void payBill(float amount); // TODO: This should be changed to private
-        void convertAccountIDStringFormat(string& number);
-        void convertCurrencyStringFormat(string& number);
 };
 
 #endif

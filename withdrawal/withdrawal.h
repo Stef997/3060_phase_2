@@ -5,25 +5,21 @@
 #include <string>
 #include <regex>
 
+#include "../user/user.h"
+#include "../user/adminUser.h"
+#include "../user/standardUser.h"
+#include "../transaction/transaction.h"
+
 using namespace std;
 
-class Withdrawal {
-    // Attributes
-    private:
-
-    public:
-
+class Withdrawal: public Transaction{
     // Methods
     private:
-        bool isValidName(string name);
-        bool isValidAccountNumber(string number);
         bool isValidAmount(string amount);
     public:
         Withdrawal();
         void withdraw(float amount);
-        bool startTransaction();
-        void convertAccountIDStringFormat(string& number);
-        void convertCurrencyStringFormat(string& number);
+        bool startTransaction(User user);
 };
 
 #endif

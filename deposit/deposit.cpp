@@ -5,30 +5,46 @@
 
 #include "deposit.h"
 
-bool Deposit::startTransaction(StandardUser user) {
-    string holdersName;
-    string accountNum;
-    float depositAmount;
+bool Deposit::startTransaction(User user) {
+    string name;
+    string nameString;
+    string bankAccountID;
+    string bankAccountIDString;
+    string amount;
+    string amountString;
 
-    Account* accounts = user.getBankAccounts();
-    cout << "Enter account number: ";
-    cin >> accountNum;
-    if(isValidAccountNumber(accountNum, accounts)){
-        cout << "Enter deposit amount: ";
-        cin >> depositAmount;
-        int intAccNum = stoi(accountNum);
-        accounts[intAccNum].addBalance(depositAmount);
-        return true;
-    } 
-    return false;
-}
-
-bool Deposit::isValidAccountNumber(string number, Account* accounts) {
-    int accountSize = sizeof(accounts)/sizeof(Account);
-    for(int i = 0; i <= accountSize; i++) {
-        if(stoi(number) == stoi(accounts->getNumber())) {
-            return true;
-        }
+    /* TODO: Implement user and check privilege
+    if (user == admin){
+        cout << "Enter Account Holder’s Name:";
+        cin >> name;
     }
-    return false;
+    else{
+        name = user.getName();
+    }
+    */
+    
+    // TODO: Add enter user id in test code
+    // User Input
+    cout << "Enter account number to pay bill from:";
+    cin >> bankAccountID;
+
+    cout << "Enter amount to deposit:";
+    cin >> amount;
+    
+    // Validate User Input
+    if (!isValidAccountNumber(bankAccountID)){
+
+    } else if(!isValidName(name)){
+
+    } else if(!isValidAmount(amount)){
+        
+    } else{
+        deposit(stof(amount));
+
+        // Convert transaction info to transaction string format
+        bankAccountIDString = bankAccountID;
+        amountString = amount;
+        convertAccountIDStringFormat(bankAccountIDString);
+        convertCurrencyStringFormat(amountString);
+    }
 }
