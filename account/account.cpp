@@ -16,6 +16,10 @@ float Account::getBalance() {
     return balance;
 }
 
+void Account::addBalance(float amount) {
+    balance = balance + amount;
+}
+
 string Account::getPlan() {
     return plan;
 }

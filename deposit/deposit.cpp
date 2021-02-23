@@ -8,6 +8,7 @@
 bool Deposit::startTransaction(User user) {
     string holdersName;
     int accountNum;
+    float depositAmount;
 
     Account* accounts = user.getBankAccounts();
 
@@ -15,8 +16,11 @@ bool Deposit::startTransaction(User user) {
     cin >> accountNum;
     if(isValidAccountNumber(accountNum, accounts)){
         cout << "Enter deposit amount: ";
+        cin >> depositAmount;
+        accounts[accountNum].addBalance(depositAmount);
+        cout << accounts[accountNum].getBalance();
         return true;
-    }
+    } 
 
     return false;
 }
@@ -24,7 +28,7 @@ bool Deposit::startTransaction(User user) {
 bool Deposit::isValidAccountNumber(int number, Account* accounts) {
     int accountSize = sizeof(accounts)/sizeof(Account);
     for(int i = 0; i <= accountSize; i++) {
-        if(acounts[i] == number){
+        if(accounts[i].getNumber() == number){
             return true;
         }
     }

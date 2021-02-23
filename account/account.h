@@ -15,6 +15,7 @@ class Account {
         int getNumber();
         void setNumber(int newNumber);
         float getBalance();
+        void addBalance(float newBalance);
         string getPlan();
         void setPlan(string newPlan);
     protected:
