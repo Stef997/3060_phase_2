@@ -126,6 +126,34 @@ bool Transfer::isValidAmount(string amount){
         value = stof(amount);
     }
 
+    // Check if amount has specific amount of characters without $ sign
+    float value;
+    string amountWithNoDollarSign;
+    if (amount.substr(0,1).compare("$") == 0){
+        amountWithNoDollarSign = amount.substr(1);
+    }
+    else{
+        amountWithNoDollarSign = amount;
+    }
+    
+    int periodPos = amountWithNoDollarSign.find(".");
+    int decimalValues = 0;
+    
+    if (periodPos == -1){
+        decimalValues = 3;
+    }
+    else{
+        decimalValues = 3 - (amountWithNoDollarSign.length() - periodPos);
+    }
+
+    if (amountWithNoDollarSign.length() + decimalValues > 8 || amountWithNoDollarSign.length() + decimalValues < 1){
+        return false;
+    }
+
+    // convert to float value
+    value = stof(amountWithNoDollarSign);
+
+    // Check if value is within boundaries 
     /*if (standard && value >= 2000){
         return false;
     }

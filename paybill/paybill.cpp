@@ -116,15 +116,34 @@ bool PayBill::isValidAmount(string amount){
         return false;
     }
 
-    // Check if amount has $ in front and convert to float value
+    // Check if amount has specific amount of characters without $ sign
     float value;
+    string amountWithNoDollarSign;
     if (amount.substr(0,1).compare("$") == 0){
-        value = stof(amount.substr(1));
+        amountWithNoDollarSign = amount.substr(1);
     }
     else{
-        value = stof(amount);
+        amountWithNoDollarSign = amount;
+    }
+    
+    int periodPos = amountWithNoDollarSign.find(".");
+    int decimalValues = 0;
+    
+    if (periodPos == -1){
+        decimalValues = 3;
+    }
+    else{
+        decimalValues = 3 - (amountWithNoDollarSign.length() - periodPos);
     }
 
+    if (amountWithNoDollarSign.length() + decimalValues > 8 || amountWithNoDollarSign.length() + decimalValues < 1){
+        return false;
+    }
+
+    // convert to float value
+    value = stof(amountWithNoDollarSign);
+
+    // Check if value is within boundaries 
     /*if (standard && value >= 2000){
         return false;
     }
