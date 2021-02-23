@@ -11,7 +11,7 @@ void BankSession::promptTransaction() {
         cout << "Enter Transaction: ";
         cin >> actionName;
         BankTransaction transaction = BankTransaction(actionName);
-        transaction.startTransaction(User(), transaction.getTransactionName());
+        transaction.startTransaction(user, transaction.getTransactionName());
         if(transaction.getTransactionName() == "login") {
             user = transaction.getUser();
         }
@@ -30,10 +30,10 @@ bool BankSession::checkPrivilege() {
     }
 }
 
-void BankSession::setUser(User newUser) {
+void BankSession::setUser(StandardUser newUser) {
     user = newUser;
 }
 
-User BankSession::getUser() {
+StandardUser BankSession::getUser() {
     return user;
 }

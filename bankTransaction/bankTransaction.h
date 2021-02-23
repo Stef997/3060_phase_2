@@ -21,7 +21,7 @@ class BankTransaction {
     public:
         BankTransaction();
         BankTransaction(string actionName);
-        bool startTransaction(User username, string actionName);
+        bool startTransaction(StandardUser sessionUser, string actionName);
         string getTransactionName();
         StandardUser getUser();
 };
