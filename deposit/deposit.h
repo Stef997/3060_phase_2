@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include "../user/user.h"
+#include "../user/standardUser.h"
 #include "../account/account.h"
 
 using namespace std;
@@ -12,7 +13,7 @@ class Deposit {
     private:
         long amount;
     public:
-        bool startTransaction(User user);
+        bool startTransaction(StandardUser user);
         void deposit(float value);
         bool isValidAccountNumber(int number, Account* accounts);
         bool isValidName(string name);

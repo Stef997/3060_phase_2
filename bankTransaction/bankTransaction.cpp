@@ -21,7 +21,7 @@ string BankTransaction::getTransactionName() {
     return name;
 }
 
-User BankTransaction::getUser() {
+StandardUser BankTransaction::getUser() {
     return user;
 }
 
@@ -44,11 +44,16 @@ bool BankTransaction::startTransaction(User username, string actionName) {
                         case 0:
                            loginName = Login().startTransaction();
                            if(loginName != "admin" && loginName != "none") {
-                               user = StandardUser(loginName);
+                               user = StandardUser();
+                               user.setHoldersName(loginName);
+                               Account account = Account();
+                               account.setNumber(1);
+                               account.setPlan("none");
+                               user.addAccount(account);
                            } else if (loginName == "admin") {
-                               user = AdminUser();
+                               cout << "Admin not implemented" << endl;
                            } else {
-                               cout << "Error: Not a valid account name";
+                               cout << "Error: Not a valid account name" << endl;
                            }
                            break;
                         case 1:
@@ -64,6 +69,7 @@ bool BankTransaction::startTransaction(User username, string actionName) {
                            cout << "Paybill not implemented" << endl;
                            break;
                         case 5:
+                           cout << user.getHoldersName() << endl;
                            isDeposited = Deposit().startTransaction(user);
                            break;
                         case 6:

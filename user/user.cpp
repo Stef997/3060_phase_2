@@ -21,8 +21,14 @@ Account* User::getBankAccounts() {
 void User::addAccount(Account account) {
     int currentSize = sizeof(bankAccounts)/sizeof(bankAccounts) + 1;
     Account* newArray = new Account[currentSize];
-    for(int i = 0; i < currentSize-1; i++) {
-        newArray[i] = bankAccounts[i];
+    if((currentSize - 1) == 1) {
+        Account firstAcc = account;
+        Account accArr[] = {account};
+        bankAccounts = accArr;
+    } else{
+        for(int i = 0; i < currentSize-1; i++) {
+            newArray[i] = bankAccounts[i];
+        }
     }
     newArray[currentSize-1] = account;
     User::setBankAccounts(newArray);
