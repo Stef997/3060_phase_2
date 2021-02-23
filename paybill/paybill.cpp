@@ -7,10 +7,12 @@ PayBill::PayBill(){
 void PayBill::startTransaction(User user)
 {
     string name;
+    string nameString;
     string bankAccountID;
     string bankAccountIDString;
     string companyName;
     string amount;
+    string amountString;
 
     /* TODO: Implement user and check privilege
     if (user == admin){
@@ -22,6 +24,7 @@ void PayBill::startTransaction(User user)
     }
     */
     
+    // User Inputs
     cout << "Enter account number to pay bill from:";
     cin >> bankAccountID;
 
@@ -31,18 +34,23 @@ void PayBill::startTransaction(User user)
     cout << "Enter amount to pay:";
     cin >> amount;
 
-    // TODO: Implement a way to add 0 preceding id proceeding 5 digits and account number
+    // Validate User Input
+    if (!isValidAccountNumber(bankAccountID)){
 
-    if (!isValidAccountNumber(bankAccountIDString)){
-        cout << "" << endl;
     } else if(!isValidName(name)){
 
     } else if(!isValidCompany(companyName)){
-        cout << "" << endl;
+
     } else if(!isValidAmount(amount)){
         cout << "ERROR: Value Error - Account name does not exist!" << endl;
     } else{
         payBill(stof(amount));
+
+        // Convert transaction info to transaction string format
+        bankAccountIDString = bankAccountID;
+        amountString = amount;
+        convertAccountIDStringFormat(bankAccountIDString);
+        convertCurrencyStringFormat(amountString);
     }
 }
 
@@ -64,8 +72,8 @@ bool PayBill::isValidAccountNumber(string accountNumber){
         return false;
     }
 
-    // Check if number is 5 characters long
-    if (accountNumber.length() != 5){
+    // Check if number is 1-5 characters long
+    if (accountNumber.length() > 5 || accountNumber.length() < 1){
         return false;
     }
 
@@ -102,16 +110,15 @@ bool PayBill::isValidName(string name){
 
 // TODO: add user parameter and current balance parameter
 bool PayBill::isValidAmount(string amount){
-
     // Check if number is all integer digits and proper currency float value
-    regex regexDigits("^([$]?[0-9]+[.,]?[0-9]{0,2})$");
+    regex regexDigits("^([$]?[0-9]+[.,]?[0-9]{0,2})$", regex::extended);
     if (!regex_match(amount, regexDigits)){
         return false;
     }
 
     // Check if amount has $ in front and convert to float value
     float value;
-    if (amount.substr(0,0).compare("$") == 0){
+    if (amount.substr(0,1).compare("$") == 0){
         value = stof(amount.substr(1));
     }
     else{
@@ -132,4 +139,42 @@ bool PayBill::isValidAmount(string amount){
     }*/
 
     return true;
+}
+
+void PayBill::convertAccountIDStringFormat(string& number){
+    while(number.length() < 5)
+    {
+        number.insert(0, "0");
+    }
+}
+
+void PayBill::convertCurrencyStringFormat(string& number){
+    int periodPos = number.find(".");
+    int decimalZeros;
+    
+    // Check if there's a dollar sign in front and remove it
+    cout <<number.substr(0,0)<<endl;
+    if (number.substr(0,1).compare("$") == 0){
+        number.erase(0);
+    }
+    
+    // add decimal if no decimal and find 0s up to 2 decimal places
+    if (periodPos == -1){
+        decimalZeros = 2;
+        number.insert(number.length(), ".");
+    }else {
+        decimalZeros = number.length() - periodPos;
+    }
+    
+    // Add zeros after decimal
+    if(decimalZeros <= 2){
+        for(int i = 0; i < decimalZeros; i++){
+            number.insert(number.length(), "0");
+        }
+    }
+    
+    // Add zeros to the front
+    for (int i = number.length(); i < 8; i++){
+        number.insert(0, "0");
+    }
 }

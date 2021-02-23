@@ -4,17 +4,20 @@ Transfer::Transfer(){
 
 }
 
-float Transfer::transfer()
+void Transfer::transfer(float amount)
 {
 
 }
 
-bool Transfer::startTransaction(/*User user*/){
+bool Transfer::startTransaction(User user){
     string name;
-    int bankAccountID;
-    int bankAccountID2;
+    string nameString;
+    string bankAccountID;
+    string bankAccountID2;
     string bankAccountIDString;
-    float amount;
+    string bankAccountIDString2;
+    string amount;
+    string amountString;
 
     /* TODO: Implement user and check privilege
     if (user == admin){
@@ -26,28 +29,21 @@ bool Transfer::startTransaction(/*User user*/){
     }
     */
     
-    /* TODO: Add enter user id in test code
-    cout << ""
-    cin >> bankAccountID
-    */
+    // User Inputs
+    cout << "Enter account number to transfer from:";
+    cin >> bankAccountID;
 
-    /* TODO: Add enter user id the user wants to transfer to in test code
-    cout << ""
-    cin >> bankAccountID2
-    */
+    cout << "Enter account number to transfer to:";
+    cin >> bankAccountID2;
 
-    /* TODO: implement an error handler for int/float values
     cout << "Enter amount to transfer:";
     cin >> amount;
-    */
 
-    // TODO: Implement a way to add 0 preceding id proceeding 5 digits to the 2 bankaccountid
-
-    /* TODO: Add functionality, fix validity checkers, return types, and add error messages
-    if (!isValidAccountNumber(bankAccountIDString)){
+    // Validate User Input
+    if (!isValidAccountNumber(bankAccountID)){
 
     } 
-    else if (!isValidAccountNumber(bankAccountIDString2)){
+    else if (!isValidAccountNumber(bankAccountID2)){
 
     }
     else if(!isValidName(name)){
@@ -57,9 +53,16 @@ bool Transfer::startTransaction(/*User user*/){
         
     } 
     else{
-        transfer(amount)
+        transfer(stof(amount));
+
+        // Convert transaction info to transaction string format
+        bankAccountIDString = bankAccountID;
+        bankAccountIDString2 = bankAccountID2;
+        amountString = amount;
+        convertAccountIDStringFormat(bankAccountIDString);
+        convertAccountIDStringFormat(bankAccountIDString2);
+        convertCurrencyStringFormat(amountString);
     }
-    */
 }
 
 //TODO: change int to string in UML
@@ -70,8 +73,8 @@ bool Transfer::isValidAccountNumber(string accountNumber){
         return false;
     }
 
-    // Check if number is 5 characters long
-    if (accountNumber.length() != 5){
+    // Check if number is 1-5 characters long
+    if (accountNumber.length() > 5 || accountNumber.length() < 1){
         return false;
     }
 
@@ -107,19 +110,72 @@ bool Transfer::isValidName(string name){
 }
 
 // TODO: add user parameter and current balance parameter
-bool Transfer::isValidAmount(float amount){
-    /*if (standard && amount >= 1000){
+bool Transfer::isValidAmount(string amount){
+    // Check if number is all integer digits and proper currency float value
+    regex regexDigits("^([$]?[0-9]+[.,]?[0-9]{0,2})$", regex::extended);
+    if (!regex_match(amount, regexDigits)){
+        return false;
+    }
+
+    // Check if amount has $ in front and convert to float value
+    float value;
+    if (amount.substr(0,0).compare("$") == 0){
+        value = stof(amount.substr(1));
+    }
+    else{
+        value = stof(amount);
+    }
+
+    /*if (standard && value >= 2000){
         return false;
     }
     */
     
-    if (amount < 0){
+    if (value < 0){
         return false;
     }
     
-    /*if (amount < balance){
+    /*if (value < balance){
         return false
     }*/
 
     return true;
+}
+
+void Transfer::convertAccountIDStringFormat(string& number){
+    while(number.length() < 5)
+    {
+        number.insert(0, "0");
+    }
+}
+
+void Transfer::convertCurrencyStringFormat(string& number){
+    int periodPos = number.find(".");
+    int decimalZeros;
+    
+    // Check if there's a dollar sign in front and remove it
+    cout <<number.substr(0,0)<<endl;
+    if (number.substr(0,1).compare("$") == 0){
+        number.erase(0);
+    }
+    
+    // add decimal if no decimal and find 0s up to 2 decimal places
+    if (periodPos == -1){
+        decimalZeros = 2;
+        number.insert(number.length(), ".");
+    }else {
+        decimalZeros = number.length() - periodPos;
+    }
+    
+    // Add zeros after decimal
+    if(decimalZeros <= 2){
+        for(int i = 0; i < decimalZeros; i++){
+            number.insert(number.length(), "0");
+        }
+    }
+    
+    // Add zeros to the front
+    for (int i = number.length(); i < 8; i++){
+        number.insert(0, "0");
+    }
 }

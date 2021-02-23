@@ -5,6 +5,10 @@
 #include <string>
 #include <regex>
 
+#include "../user/user.h"
+#include "../user/adminUser.h"
+#include "../user/standardUser.h"
+
 using namespace std;
 
 class Transfer {
@@ -17,11 +21,13 @@ class Transfer {
     private:
         bool isValidName(string name);
         bool isValidAccountNumber(string number);
-        bool isValidAmount(float amount);
+        bool isValidAmount(string amount);
     public:
         Transfer();
-        float transfer();
-        bool startTransaction();
+        void transfer(float amount);
+        bool startTransaction(User user);
+        void convertAccountIDStringFormat(string& number);
+        void convertCurrencyStringFormat(string& number);
 };
 
 #endif

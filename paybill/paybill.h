@@ -28,7 +28,8 @@ class PayBill {
         PayBill();
         void startTransaction(User user);
         void payBill(float amount); // TODO: This should be changed to private
-
+        void convertAccountIDStringFormat(string& number);
+        void convertCurrencyStringFormat(string& number);
 };
 
 #endif
