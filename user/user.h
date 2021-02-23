@@ -12,6 +12,7 @@ class User: public Account {
         Account* bankAccounts;
 
     public:
+        User();
         Account* getBankAccounts();
         void addAccount(Account account);
         void setBankAccounts(Account* accounts);

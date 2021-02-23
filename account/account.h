@@ -8,12 +8,13 @@ using namespace std;
 
 class Account { 
     private:
-        int number = 0;
-        float balance = 0;
+        string number;
+        float balance;
         string plan;
     public:
-        int getNumber();
-        void setNumber(int newNumber);
+        Account();
+        string getNumber();
+        void setNumber(string newNumber);
         float getBalance();
         void addBalance(float newBalance);
         string getPlan();

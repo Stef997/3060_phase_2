@@ -5,6 +5,11 @@
 
 #include "user.h"
 
+User::User() {
+    Account account = Account();
+    addAccount(account);
+}
+
 //TODO: Create the account class for all bank accounts
 //Used to store the accounts being accessed by the
 //current user of the session
@@ -31,7 +36,7 @@ void User::addAccount(Account account) {
         }
     }
     newArray[currentSize-1] = account;
-    User::setBankAccounts(newArray);
+    setBankAccounts(newArray);
 }
 
 //addSessionTransaction is to be moved to BankSession
