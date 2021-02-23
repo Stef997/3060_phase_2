@@ -15,7 +15,7 @@ class Deposit {
     public:
         bool startTransaction(StandardUser user);
         void deposit(float value);
-        bool isValidAccountNumber(int number, Account* accounts);
+        bool isValidAccountNumber(string number, Account* accounts);
         bool isValidName(string name);
         bool isValidAmount(float amount);
     protected:

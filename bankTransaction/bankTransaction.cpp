@@ -44,12 +44,9 @@ bool BankTransaction::startTransaction(StandardUser sessionUser, string actionNa
                         case 0:
                            loginName = Login().startTransaction();
                            if(loginName != "admin" && loginName != "none") {
-                               user = StandardUser();
+                               StandardUser * newUser = new StandardUser();
+                               user = *newUser;
                                user.setHoldersName(loginName);
-                               Account account = Account();
-                               account.setNumber(1);
-                               account.setPlan("none");
-                               user.addAccount(account);
                            } else if (loginName == "admin") {
                                cout << "Admin not implemented" << endl;
                            } else {

@@ -4,11 +4,17 @@
 
 #include "account.h"
 
-int Account::getNumber() {
+Account::Account() {
+    number = "00000";
+    balance = 0;
+    plan = "none";
+}
+
+string Account::getNumber() {
     return number;
 }
 
-void Account::setNumber(int newNumber) {
+void Account::setNumber(string newNumber) {
     number = newNumber;
 }
 
