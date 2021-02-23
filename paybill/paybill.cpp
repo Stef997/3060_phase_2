@@ -126,7 +126,7 @@ bool PayBill::isValidAmount(string amount){
         amountWithNoDollarSign = amount;
     }
     
-    int periodPos = amount.find(".");
+    int periodPos = amountWithNoDollarSign.find(".");
     int decimalValues = 0;
     
     if (periodPos == -1){
