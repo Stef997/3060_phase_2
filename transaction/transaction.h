@@ -12,6 +12,7 @@ class Transaction {
     protected:
         bool isValidName(string name);
         bool isValidAccountNumber(string number);
+        bool isValidAmount(string amount);
     public:
         virtual bool startTransaction(User user) = 0;
         void convertAccountIDStringFormat(string& number);

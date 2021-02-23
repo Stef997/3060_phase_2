@@ -48,3 +48,34 @@ bool Deposit::startTransaction(User user) {
         convertCurrencyStringFormat(amountString);
     }
 }
+
+
+// TODO: add user parameter and current balance parameter
+bool Deposit::isValidAmount(string amount){
+    if (!Transaction::isValidAmount(amount)){
+        return false;
+    }
+
+    // Convert inputed amount to a float value
+    float value;
+    string amountWithNoDollarSign;
+    if (amount.substr(0,1).compare("$") == 0){
+        amountWithNoDollarSign = amount.substr(1);
+    }
+    else{
+        amountWithNoDollarSign = amount;
+    }
+
+    // convert to float value
+    value = stof(amountWithNoDollarSign);
+    
+    if (value < 0){
+        return false;
+    }
+    
+    /*if (value < balance){
+        return false
+    }*/
+
+    return true;
+}
