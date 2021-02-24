@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <regex>
-#include "../user/user.h"
+#include "changePlan.h"
 
 using namespace std;
 
@@ -10,49 +10,57 @@ class ChangePlan {
 
     }
 
-    public: void setPlan(string plan){
+bool ChangePlan::isValidAccountNumber(string accountNumber){
 
+    // Check if number is not null
+    if (accountNumber.empty()){
+        return false;
     }
 
-    public: void startTransaction(User user){
-        string name;
-        string newName;
-        int bankAccountID;
-        string bankAccountIDString;
-        float amount;
-
-        cout << "Enter Account Holder's Name";
-        cin >> name;
-
-        cout << "Enter The Account Number To Deposit To";
-        cin >> bankAccountID;
+    // Check if number is 1-5 characters long
+    if (accountNumber.length() > 5  accountNumber.length() < 1){
+        return false;
     }
 
-    
-    private: bool isValidAccountNumber(string accountNumber){
-
-     return false;
+    // Check if number is all integer digits
+    regex regexDigits("[0-9]+");
+    if (!regex_match(accountNumber, regexDigits)){
+        return false;
     }
-        //got from stephan
-      private: bool isValidName(string name){
-             // Check if name is not null or empty string
-        if (name.empty() || name.compare("") == 0){
-            return false;
-        }
 
-        // Check if name is at most 20 characters long and at least 1 character long
-        if (name.length() > 20){
-            return false;
-        }
+    // TODO: Check number exist in the data base
 
-        // Check if name does not contain digits or illegal characters
-        regex regexName("[^\\t\\n\\r\\f\\v0-9\\[\\]!@#$%^&*()_+{}|\\:;\"\'<,>.?/~`]+");
-        if (!regex_match(name, regexName)){
-            return false;
-        }
+    return true;
+} 
 
+
+bool ChangePlan::startTransaction(StandardUser user) {
+    string holdersName;
+    string accountNum;
+    float depositAmount;
+
+    Account* accounts = user.getBankAccounts();
+    cout << "Enter account number: ";
+    cin >> accountNum;
+    if(isValidAccountNumber(accountNum, accounts)){
+        cout << "Enter deposit amount: ";
+        cin >> depositAmount;
+        int intAccNum = stoi(accountNum);
+        accounts[intAccNum].addBalance(depositAmount);
         return true;
+    } 
+    return false;
+}
 
-       return true;
-    }
+ private: bool isValidName(string name){
+             // Check if name is not null or empty string
+        if (name.empty()  name.compare("") == 0){
+            return false;
+        }
+
 };
+
+
+void Account::setPlan(string newPlan) {
+    plan = newPlan;
+}
