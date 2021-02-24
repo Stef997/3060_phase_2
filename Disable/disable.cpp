@@ -36,8 +36,6 @@ bool Disable::isValidAccountNumber(string accountNumber){
         return false;
     }
 
-    // TODO: Check number exist in the data base
-
     return true;
 } 
 

@@ -6,7 +6,7 @@
 #include <string>
 using namespace std;
 
-class Disabke {
+class Disable {
    private:
     public:
     string getTransactionName();
