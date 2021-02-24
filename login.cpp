@@ -79,11 +79,3 @@ class Login {
         //Return the user/assign the BankSession's current user 
     }
 };
-
-int main() {
-    Login loginAction;
-
-    loginAction.startTransaction();
-    
-    return 0;
-}
