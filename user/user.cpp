@@ -49,11 +49,19 @@ bool User::isAdmin(){
     return false;
 }
 
-Account User::findAccount(string name, string id){
+bool User::findAccount(string name, string id){
     for (int i = 0; i < bankAccounts.size(); i++){
-        Account temp = bankAccounts[i];
-        if (temp.getName().compare(name) == 0 && temp.getNumber().compare(id) == 0){
-            return temp;
+        if (bankAccounts[i].getName().compare(name) == 0 && bankAccounts[i].getNumber().compare(id) == 0){
+            return true;
+        }
+    }
+    return false;
+}
+
+Account& User::getAccount(string name, string id){
+    for (int i = 0; i < bankAccounts.size(); i++){
+        if (bankAccounts[i].getName().compare(name) == 0 && bankAccounts[i].getNumber().compare(id) == 0){
+            return bankAccounts[i];
         }
     }
 }

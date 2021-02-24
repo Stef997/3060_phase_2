@@ -5,7 +5,7 @@
 
 #include "deposit.h"
 
-bool Deposit::startTransaction(User user) {
+bool Deposit::startTransaction(User& user) {
     string name;
     string nameString;
     string bankAccountID;
@@ -41,24 +41,31 @@ bool Deposit::startTransaction(User user) {
         convertAccountIDStringFormat(bankAccountIDString);
         convertCurrencyStringFormat(amountString);
 
-        // find user account
-        account = user.findAccount(name, bankAccountIDString);
+        // Find User
+        if (!user.findAccount(name, bankAccountIDString)){
+            return false;
+        }
+
+        // Get user account
+        account = user.getAccount(name, bankAccountIDString);
     }
     
     // Validate User Input For Deposit
-    if(!isValidAmount(amount)){
+    if(!isValidAmount(amount, account)){
         
     } else{
-        deposit(stof(amount));
-
-        
-        
+        // Deposit into user account
+        deposit(stof(amount), account);
     }
+}
+
+void Deposit::deposit(float amount, Account& account){
+    account.addBalance(amount);
 }
 
 
 // TODO: add user parameter and current balance parameter
-bool Deposit::isValidAmount(string amount){
+bool Deposit::isValidAmount(string amount, Account account){
     if (!Transaction::isValidAmount(amount)){
         return false;
     }
@@ -80,9 +87,9 @@ bool Deposit::isValidAmount(string amount){
         return false;
     }
     
-    /*if (value < balance){
-        return false
-    }*/
+    if (value + account.getBalance() >= 10000){
+        return false;
+    }
 
     return true;
 }
