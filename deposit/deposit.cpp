@@ -1,11 +1,15 @@
 /*
- *
+ * Deposit transaction class. Takes the address of a user
+ * and adds a value to the account class associated with
+ * the user using the named 'deposit' class with
+ * supplementary functions intended to check for correct
+ * inputs.
  *
  */
 
 #include "deposit.h"
 
-bool Deposit::startTransaction(User& user) {
+bool Deposit::startTransaction(User user) {
     string name;
     string nameString;
     string bankAccountID;
@@ -31,9 +35,13 @@ bool Deposit::startTransaction(User& user) {
     
     // Validate User Input For Account
     if (!isValidAccountNumber(bankAccountID)){
-
+        //Output error message indicating the lack of privileges
+        cout << "Error: Account number is invalid!" << endl;
+        return false;
     } else if(!isValidName(name)){
-
+        //Output error message indicating invalid info
+        cout << "Error: Account holders name is invalid!" << endl;
+        return false;
     } else{
         // Convert transaction info to transaction string format
         bankAccountIDString = bankAccountID;
@@ -52,13 +60,17 @@ bool Deposit::startTransaction(User& user) {
     
     // Validate User Input For Deposit
     if(!isValidAmount(amount, account)){
-        
+        cout << "Error: invalid value amount!" << endl;
+        return false;
     } else{
         // Deposit into user account
         deposit(stof(amount), account);
     }
+
+    return true;
 }
 
+//Apply changes to the account associated with the user
 void Deposit::deposit(float amount, Account& account){
     account.addBalance(amount);
 
@@ -68,13 +80,16 @@ void Deposit::deposit(float amount, Account& account){
 
 // TODO: add user parameter and current balance parameter
 bool Deposit::isValidAmount(string amount, Account account){
+
     if (!Transaction::isValidAmount(amount)){
         return false;
     }
 
-    // Convert inputed amount to a float value
+    // Convert inputted amount to a float value
     float value;
     string amountWithNoDollarSign;
+
+    //Check for dollar sign within amount string
     if (amount.substr(0,1).compare("$") == 0){
         amountWithNoDollarSign = amount.substr(1);
     }
@@ -85,10 +100,12 @@ bool Deposit::isValidAmount(string amount, Account account){
     // convert to float value
     value = stof(amountWithNoDollarSign);
     
+    //Check for negative values
     if (value < 0){
         return false;
     }
     
+    //Check for the value amount on deposits
     if (value + account.getBalance() >= 10000){
         return false;
     }

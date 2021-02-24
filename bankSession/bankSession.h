@@ -12,13 +12,13 @@ using namespace std;
 
 class BankSession: public BankTransaction, public User {
     private:
-        StandardUser user;
+        User user;
     public:
         void promptTransaction();
         BankSession();
         bool checkPrivilege();
-        void setUser(StandardUser user);
-        StandardUser getUser();
+        void setUser(User user);
+        User getUser();
 };
 
 #endif

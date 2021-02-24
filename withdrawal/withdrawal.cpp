@@ -35,9 +35,9 @@ bool Withdrawal::startTransaction(User user)
     if (!isValidAccountNumber(bankAccountID)){
 
     } else if(!isValidName(name)){
-
+        return false;
     } else if(!isValidAmount(amount)){
-        
+        return false;
     } else{
         withdraw(stof(amount));
 
@@ -47,6 +47,7 @@ bool Withdrawal::startTransaction(User user)
         convertAccountIDStringFormat(bankAccountIDString);
         convertCurrencyStringFormat(amountString);
     }
+    return true;
 }
 
 //TODO: method should be private

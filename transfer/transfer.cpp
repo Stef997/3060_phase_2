@@ -41,16 +41,20 @@ bool Transfer::startTransaction(User user){
 
     // Validate User Input
     if (!isValidAccountNumber(bankAccountID)){
-
+        cout << "Error: invalid account number!" << endl;
+        return false;
     } 
     else if (!isValidAccountNumber(bankAccountID2)){
-
+        cout << "Error: invalid account number!" << endl;
+        return false;
     }
     else if(!isValidName(name)){
-
+        cout << "Error: invalid account holders name" << endl;
+        return false;
     } 
     else if(!isValidAmount(amount)){
-        
+        cout << "Error: invalid value amount!" << endl;
+        return false;
     } 
     else{
         transfer(stof(amount));
@@ -63,6 +67,7 @@ bool Transfer::startTransaction(User user){
         convertAccountIDStringFormat(bankAccountIDString2);
         convertCurrencyStringFormat(amountString);
     }
+    return true;
 }
 
 // TODO: add user parameter and current balance parameter
