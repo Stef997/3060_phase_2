@@ -44,6 +44,15 @@ bool Transaction::isValidName(string name){
     return true;
 }
 
+
+void Transaction::convertNameStringFormat(string& name){
+    int iteration = 20 - name.length();
+
+    for (int i = 0; i < iteration; i++){
+        name.append(" ");
+    }
+}
+
 void Transaction::convertAccountIDStringFormat(string& number){
     while(number.length() < 5)
     {
