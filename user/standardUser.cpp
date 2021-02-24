@@ -5,6 +5,10 @@
 
 #include "standardUser.h"
 
+StandardUser::StandardUser() : User() {
+    
+}
+
 string StandardUser::getHoldersName() {
     return holdersName;
 }
