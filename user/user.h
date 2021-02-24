@@ -9,13 +9,16 @@ using namespace std;
 
 class User: public Account {
     private:
-        Account* bankAccounts;
+        /*Account* bankAccounts;*/
+        vector<Account> bankAccounts;
 
     public:
         User();
-        Account* getBankAccounts();
+        vector<Account> getBankAccounts();
         void addAccount(Account account);
-        void setBankAccounts(Account* accounts);
+        /*void setBankAccounts(Account* accounts);*/
+        bool isAdmin();
+        Account findAccount(string name, string id);
 };
 
 #endif

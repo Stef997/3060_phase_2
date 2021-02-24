@@ -11,6 +11,7 @@ class AdminUser: public User {
     private:
     public:
         AdminUser();
+        bool isAdmin();
     protected:  
 };
 

@@ -17,6 +17,7 @@ class Account {
     public:
         Account();
         Account(string bankAccountLine);
+        string getName();
         string getNumber();
         void setNumber(string newNumber);
         float getBalance();

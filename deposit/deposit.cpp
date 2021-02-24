@@ -12,18 +12,16 @@ bool Deposit::startTransaction(User user) {
     string bankAccountIDString;
     string amount;
     string amountString;
+    Account account;
 
-    /* TODO: Implement user and check privilege
-    if (user == admin){
+    if (user.isAdmin()){
         cout << "Enter Account Holder’s Name:";
         cin >> name;
     }
     else{
         name = user.getName();
     }
-    */
     
-    // TODO: Add enter user id in test code
     // User Input
     cout << "Enter account number to pay bill from:";
     cin >> bankAccountID;
@@ -31,21 +29,30 @@ bool Deposit::startTransaction(User user) {
     cout << "Enter amount to deposit:";
     cin >> amount;
     
-    // Validate User Input
+    // Validate User Input For Account
     if (!isValidAccountNumber(bankAccountID)){
 
     } else if(!isValidName(name)){
 
-    } else if(!isValidAmount(amount)){
-        
     } else{
-        deposit(stof(amount));
-
         // Convert transaction info to transaction string format
         bankAccountIDString = bankAccountID;
         amountString = amount;
         convertAccountIDStringFormat(bankAccountIDString);
         convertCurrencyStringFormat(amountString);
+
+        // find user account
+        account = user.findAccount(name, bankAccountIDString);
+    }
+    
+    // Validate User Input For Deposit
+    if(!isValidAmount(amount)){
+        
+    } else{
+        deposit(stof(amount));
+
+        
+        
     }
 }
 

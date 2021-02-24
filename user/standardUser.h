@@ -13,6 +13,7 @@ class StandardUser: public User {
     public:
         void setHoldersName(string newName);
         string getHoldersName();
+        bool isAdmin();
     protected:
 };
 

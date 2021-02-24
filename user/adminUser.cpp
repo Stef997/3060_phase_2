@@ -13,3 +13,7 @@ AdminUser::AdminUser() {
     AdminUser::setBankAccounts(accounts);
 }
 
+bool AdminUser::isAdmin(){
+    return true;
+}
+
