@@ -101,7 +101,7 @@ bool Transaction::isValidAmount(string amount){
 
 
     // Check if amount has $ in front and convert to float value
-    float value;
+    value;
     if (amount.substr(0,0).compare("$") == 0){
         value = stof(amount.substr(1));
     }
@@ -110,7 +110,7 @@ bool Transaction::isValidAmount(string amount){
     }
 
     // Check if amount has specific amount of characters without $ sign
-    float value;
+    value;
     string amountWithNoDollarSign;
     if (amount.substr(0,1).compare("$") == 0){
         amountWithNoDollarSign = amount.substr(1);

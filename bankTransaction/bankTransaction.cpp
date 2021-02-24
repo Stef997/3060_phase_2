@@ -42,6 +42,7 @@ bool BankTransaction::startTransaction(StandardUser sessionUser, string actionNa
                 if(isAction) {
                     switch(i) {
                         case 0:
+                           //TODO: Redo login procedure
                            loginName = Login().startTransaction();
                            if(loginName != "admin" && loginName != "none") {
                                StandardUser * newUser = new StandardUser();

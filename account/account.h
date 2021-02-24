@@ -20,11 +20,11 @@ class Account {
         string getName();
         string getNumber();
         void setNumber(string newNumber);
+        string getPlan();
+        void setPlan(string newPlan);
         float getBalance();
         void addBalance(float newBalance);
         void removeBalance(float newBalance);
-        string getPlan();
-        void setPlan(string newPlan);
     protected:
 };
 

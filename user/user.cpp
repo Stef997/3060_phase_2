@@ -11,9 +11,6 @@ User::User() {
 }
 
 /*
-//TODO: Create the account class for all bank accounts
-//Used to store the accounts being accessed by the
-//current user of the session
 void User::setBankAccounts(Account* accounts) {
     bankAccounts = accounts;
 }
@@ -58,6 +55,7 @@ bool User::findAccount(string name, string id){
     return false;
 }
 
+//TODO: Simplify if comparison to take advantage of findAccount()
 Account& User::getAccount(string name, string id){
     for (int i = 0; i < bankAccounts.size(); i++){
         if (bankAccounts[i].getName().compare(name) == 0 && bankAccounts[i].getNumber().compare(id) == 0){
