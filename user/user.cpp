@@ -5,11 +5,6 @@
 
 #include "user.h"
 
-User::User() {
-    Account account = Account();
-    addAccount(account);
-}
-
 /*
 void User::setBankAccounts(Account* accounts) {
     bankAccounts = accounts;

@@ -13,7 +13,6 @@ class User: public Account {
         vector<Account> bankAccounts;
 
     public:
-        User();
         vector<Account> getBankAccounts();
         void addAccount(Account account);
         /*void setBankAccounts(Account* accounts);*/

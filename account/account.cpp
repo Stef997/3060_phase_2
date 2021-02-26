@@ -38,6 +38,10 @@ string Account::getName() {
     return name;
 }
 
+void Account::setName(string newName) {
+    name = newName;
+}
+
 void Account::setNumber(string newNumber) {
     number = newNumber;
 }

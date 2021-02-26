@@ -53,6 +53,7 @@ void Session::promptTransaction() {
                                    standard.setName(username);
                                    standardUser = standard;
                                    isAdminSession = false;
+                                   cout << standardUser.getBankAccounts().size() << endl;
                                }
                            }
                            break;

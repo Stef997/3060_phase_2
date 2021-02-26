@@ -18,6 +18,7 @@ class Account {
         Account();
         Account(string bankAccountLine);
         string getName();
+        void setName(string newName);
         string getNumber();
         void setNumber(string newNumber);
         string getPlan();
