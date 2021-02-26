@@ -7,8 +7,9 @@
 
 StandardUser::StandardUser() : User() {
     Account account = Account();
-    account.setName(name);
+    name = account.getName();
     addAccount(account);
+
     cout << "Account name: " << account.getName() << endl;
 }
 
