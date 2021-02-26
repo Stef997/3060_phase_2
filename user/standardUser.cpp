@@ -9,10 +9,10 @@ StandardUser::StandardUser() : User() {
     
 }
 
-string StandardUser::getHoldersName() {
-    return holdersName;
+string StandardUser::getName() {
+    return name;
 }
 
-void StandardUser::setHoldersName(string newName) {
-    holdersName = newName;
+void StandardUser::setName(string newName) {
+    name = newName;
 }

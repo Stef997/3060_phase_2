@@ -50,7 +50,7 @@ void Session::promptTransaction() {
                            } else if (isStandard) {
                                if(isStandard) {
                                    StandardUser standard = StandardUser();
-                                   standard.setHoldersName(username);
+                                   standard.setName(username);
                                    standardUser = standard;
                                    isAdminSession = false;
                                }
@@ -69,8 +69,14 @@ void Session::promptTransaction() {
                            cout << "Paybill not implemented" << endl;
                            break;
                         case 5:
-                           Deposit().startTransaction(standardUser);
-                           cout << "Deposit not implemented" << endl;
+                           if(isAdminSession) {
+                               if(adminUser.isAdmin() == true) {
+                                   Deposit().startTransaction(adminUser);
+                               }
+                           } else {
+                               Deposit().startTransaction(standardUser);
+                           }
+                           cout << standardUser.getBankAccounts().at(0).getBalance() << endl;
                            break;
                         case 6:
                            cout << "Create not implemented" << endl;

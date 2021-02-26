@@ -9,11 +9,11 @@ using namespace std;
 
 class StandardUser: public User {
     private:
-        string holdersName;
+        string name;
     public:
         StandardUser();
-        void setHoldersName(string newName);
-        string getHoldersName();
+        void setName(string newName);
+        string getName();
     protected:
 };
 
