@@ -21,7 +21,7 @@ class Account {
         string getNumber();
         void setNumber(string newNumber);
         string getPlan();
-        void setPlan(string newPlan);
+        void changePlan();
         float getBalance();
         void addBalance(float newBalance);
         void removeBalance(float newBalance);

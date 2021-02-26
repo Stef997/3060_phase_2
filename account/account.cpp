@@ -58,6 +58,8 @@ string Account::getPlan() {
     return plan;
 }
 
-void Account::setPlan(string newPlan) {
-    plan = newPlan;
+void Account::changePlan() {
+    if(plan.compare("SP")){
+        plan = "NP";
+    }
 }

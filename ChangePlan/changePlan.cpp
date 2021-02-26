@@ -1,58 +1,58 @@
-#include <iostream>
-#include <string>
-#include <regex>
-#include "../user/user.h"
+#include "changePlan.h"
 
-using namespace std;
+ChangePlan::ChangePlan(){
 
-class ChangePlan {
-    public: ChangePlan(){
+}
 
+void ChangePlan::setPlan(Account& account){
+    account.changePlan();
+}
+
+bool ChangePlan::startTransaction(User user){
+    string name;
+    string nameString;
+    string bankAccountID;
+    string bankAccountIDString;
+    Account account;
+
+    // Check If User Is Admin Session Before Proceeding
+    if (!user.isAdmin()){
+        cout << "ERROR: Transaction Error: Cannot access the change plan transaction" << endl;
+        return false;
     }
 
-    public: void setPlan(string plan){
+    // User Input
+    cout << "Enter Account Holder’s Name:";
+    cin >> name;
 
-    }
+    cout << "Enter Account Number:";
+    cin >> bankAccountID;
 
-    public: void startTransaction(User user){
-        string name;
-        string newName;
-        int bankAccountID;
-        string bankAccountIDString;
-        float amount;
+    // Validate User Input For Account
+    if (!isValidAccountNumber(bankAccountID)){
+        //Output error message indicating the lack of privileges
+        cout << "Error: Account number is invalid!" << endl;
+        return false;
+    } else if(!isValidName(name)){
+        //Output error message indicating invalid info
+        cout << "Error: Account holders name is invalid!" << endl;
+        return false;
+    } else{
+        // Convert transaction info to transaction string format
+        nameString = name;
+        bankAccountIDString = bankAccountID;
+        convertNameStringFormat(nameString);
+        convertAccountIDStringFormat(bankAccountIDString);
 
-        cout << "Enter Account Holder's Name";
-        cin >> name;
-
-        cout << "Enter The Account Number To Deposit To";
-        cin >> bankAccountID;
-    }
-
-    
-    private: bool isValidAccountNumber(string accountNumber){
-
-     return false;
-    }
-        //got from stephan
-      private: bool isValidName(string name){
-             // Check if name is not null or empty string
-        if (name.empty() || name.compare("") == 0){
+        // Find User
+        if (!user.findAccount(nameString, bankAccountIDString)){
             return false;
         }
 
-        // Check if name is at most 20 characters long and at least 1 character long
-        if (name.length() > 20){
-            return false;
-        }
+        // Get user account
+        account = user.getAccount(nameString, bankAccountIDString);
 
-        // Check if name does not contain digits or illegal characters
-        regex regexName("[^\\t\\n\\r\\f\\v0-9\\[\\]!@#$%^&*()_+{}|\\:;\"\'<,>.?/~`]+");
-        if (!regex_match(name, regexName)){
-            return false;
-        }
-
-        return true;
-
-       return true;
+        // Change Account Plan
+        setPlan(account);
     }
-};
+}
