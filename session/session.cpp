@@ -49,11 +49,9 @@ void Session::promptTransaction() {
                                }
                            } else if (isStandard) {
                                if(isStandard) {
-                                   StandardUser standard = StandardUser();
-                                   standard.setName(username);
+                                   StandardUser standard = StandardUser(username);
                                    standardUser = standard;
                                    isAdminSession = false;
-                                   cout << standardUser.getBankAccounts().size() << endl;
                                }
                            }
                            break;
@@ -77,7 +75,8 @@ void Session::promptTransaction() {
                            } else {
                                Deposit().startTransaction(standardUser);
                            }
-                           cout << "Session value: " << standardUser.getBankAccounts().at(0).getBalance() << endl;
+                           cout << endl;
+                           cout << "Session standard user balance: " << standardUser.getBankAccounts().at(0).getBalance() << endl;
                            break;
                         case 6:
                            cout << "Create not implemented" << endl;
