@@ -15,15 +15,15 @@ using namespace std;
 
 class BankTransaction {
     private:
-        StandardUser user;
+        User user;
         string name;
         static bool noCaseComp(unsigned char a, unsigned char b);
     public:
         BankTransaction();
         BankTransaction(string actionName);
-        bool startTransaction(StandardUser sessionUser, string actionName);
+        bool startTransaction(User user, string actionName);
         string getTransactionName();
-        StandardUser getUser();
+        User getUser();
 };
 
 #endif

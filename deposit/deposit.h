@@ -6,19 +6,16 @@
 #include "../user/user.h"
 #include "../user/standardUser.h"
 #include "../account/account.h"
+#include "../transaction/transaction.h"
 
 using namespace std;
 
-class Deposit {
+class Deposit: public Transaction {
     private:
-        long amount;
+        bool isValidAmount(string amount, Account account);
     public:
-        bool startTransaction(StandardUser user);
-        void deposit(float value);
-        bool isValidAccountNumber(string number, Account* accounts);
-        bool isValidName(string name);
-        bool isValidAmount(float amount);
-    protected:
+        bool startTransaction(User user);
+        void deposit(float value, Account& account);
 };
 
 #endif

@@ -34,6 +34,10 @@ string Account::getNumber() {
     return number;
 }
 
+string Account::getName() {
+    return name;
+}
+
 void Account::setNumber(string newNumber) {
     number = newNumber;
 }

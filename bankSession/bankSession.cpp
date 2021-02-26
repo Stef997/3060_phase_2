@@ -30,10 +30,10 @@ bool BankSession::checkPrivilege() {
     }
 }
 
-void BankSession::setUser(StandardUser newUser) {
+void BankSession::setUser(User newUser) {
     user = newUser;
 }
 
-StandardUser BankSession::getUser() {
+User BankSession::getUser() {
     return user;
 }

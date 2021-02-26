@@ -7,9 +7,11 @@
 #include "adminUser.h"
 #include "../account/account.h"
 
-AdminUser::AdminUser() {
-    Account account;
-    Account* accounts = new Account[1]{account};
-    AdminUser::setBankAccounts(accounts);
+AdminUser::AdminUser() : User(){
+
+}
+
+bool AdminUser::isAdmin(){
+    return true;
 }
 

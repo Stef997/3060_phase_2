@@ -21,11 +21,11 @@ string BankTransaction::getTransactionName() {
     return name;
 }
 
-StandardUser BankTransaction::getUser() {
+User BankTransaction::getUser() {
     return user;
 }
 
-bool BankTransaction::startTransaction(StandardUser sessionUser, string actionName) {
+bool BankTransaction::startTransaction(User user, string actionName) {
     string loginName;
     bool isDeposited;
 
@@ -42,6 +42,8 @@ bool BankTransaction::startTransaction(StandardUser sessionUser, string actionNa
                 if(isAction) {
                     switch(i) {
                         case 0:
+                           //TODO: Redo login procedure
+                           /*
                            loginName = Login().startTransaction();
                            if(loginName != "admin" && loginName != "none") {
                                StandardUser * newUser = new StandardUser();
@@ -51,7 +53,7 @@ bool BankTransaction::startTransaction(StandardUser sessionUser, string actionNa
                                cout << "Admin not implemented" << endl;
                            } else {
                                cout << "Error: Not a valid account name" << endl;
-                           }
+                           }*/
                            break;
                         case 1:
                            cout << "Logout not implemented" << endl;
@@ -66,7 +68,7 @@ bool BankTransaction::startTransaction(StandardUser sessionUser, string actionNa
                            cout << "Paybill not implemented" << endl;
                            break;
                         case 5:
-                           isDeposited = Deposit().startTransaction(sessionUser);
+                           isDeposited = Deposit().startTransaction(user);
                            break;
                         case 6:
                            cout << "Create not implemented" << endl;
