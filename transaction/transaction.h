@@ -17,7 +17,6 @@ class Transaction {
         bool isValidName(string name);
         bool isValidAccountNumber(string number);
         bool isValidAmount(string amount);
-        virtual bool startTransaction(User user) = 0;
         void convertAccountIDStringFormat(string& number);
         void convertCurrencyStringFormat(string& number);
         void convertNameStringFormat(string& name);
