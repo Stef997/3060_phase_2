@@ -6,10 +6,17 @@
 #include "standardUser.h"
 
 StandardUser::StandardUser() : User() {
+    name = "none";
     Account account = Account();
-    account.setName(name);
+    account.setName("none");
     addAccount(account);
-    cout << "Account name: " << account.getName() << endl;
+}
+
+StandardUser::StandardUser(string initName) : User() {
+    name = initName;
+    Account account = Account();
+    account.setName(initName);
+    addAccount(account);
 }
 
 string StandardUser::getName() {

@@ -12,6 +12,7 @@ class StandardUser: public User {
         string name;
     public:
         StandardUser();
+        StandardUser(string initName);
         void setName(string newName);
         string getName();
     protected:

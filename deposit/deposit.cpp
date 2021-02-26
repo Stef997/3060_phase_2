@@ -97,7 +97,6 @@ bool Deposit::startTransaction(StandardUser& user) {
         cout << "Error: Account holders name is invalid!" << endl;
         return false;
     } else{
-        cout << "User name: " << user.getName() << endl;
         // Convert transaction info to transaction string format
         bankAccountIDString = bankAccountID;
         amountString = amount;
@@ -106,19 +105,10 @@ bool Deposit::startTransaction(StandardUser& user) {
         convertAccountIDStringFormat(bankAccountIDString);
         convertCurrencyStringFormat(amountString);
 
-        cout << "Name: " << name << endl;
-        cout << "Bank account ID: " << bankAccountID << endl;
-
-        cout << "User account name: " << user.getBankAccounts()[0].getName() << endl;
-        cout << "User Bank ID: " << user.getBankAccounts()[0].getNumber() << endl;
-        
-        cout << "Name comparison result: " << user.getBankAccounts()[0].getName().compare(name) << endl;
-
         // Find User
         if (!user.findAccount(name, bankAccountID)){
             return false;
         }
-        cout << "Here" << endl;
         // Get user account
         account = user.getAccount(name, bankAccountID);
         cout << "Deposit value: ";
