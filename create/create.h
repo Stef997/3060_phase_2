@@ -5,22 +5,20 @@
 #include <string>
 #include <regex>
 
+#include "../user/user.h"
+#include "../user/standardUser.h"
+#include "../account/account.h"
+#include "../transaction/transaction.h"
+
 using namespace std;
 
-class Create {
-    // Attributes
+class Create : public Transaction{
     private:
-
-    public:
-
-    // Methods
-    private:
-        bool isValidName(string name);
         bool isValidAmount(string amount);
     public:
         Create();
-        void create(float amount);
-        bool startTransaction();
+        void createAccount(User& user, string name, float amount);
+        bool startTransaction(User& user);
 };
 
 #endif

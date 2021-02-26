@@ -1,17 +1,22 @@
+#ifndef disable_h_
+#define disable_h_
+
 #include <iostream>
 #include <string>
+#include <regex>
+
 #include "../user/user.h"
-#include "../user/adminUser.h"
 #include "../user/standardUser.h"
-#include <string>
+#include "../account/account.h"
+#include "../transaction/transaction.h"
+
 using namespace std;
 
-class Disable {
-   private:
+class Disable : public Transaction {
     public:
-    string getTransactionName();
-    StandardUser getUser();
-     bool startTransaction(User user);
-    bool isValidName(string name);
-    bool isValidAccountNumber(string number, Account* accounts);
+        Disable();
+        void disableAccount(Account& account);
+        bool startTransaction(User& user);
 };
+
+#endif

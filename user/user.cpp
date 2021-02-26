@@ -55,6 +55,19 @@ bool User::findAccount(string name, string id){
     return false;
 }
 
+void User::deleteAccount(string name, string id){
+    for (int i = 0; i < bankAccounts.size(); i++){
+        if (bankAccounts[i].getName().compare(name) == 0 && bankAccounts[i].getNumber().compare(id) == 0){
+            bankAccounts.erase(bankAccounts.begin() + i);
+        }
+    }
+}
+
+void User::createAccount(string name, float amount){
+    Account account = Account();
+    bankAccounts.push_back(account);
+}
+
 //TODO: Simplify if comparison to take advantage of findAccount()
 Account& User::getAccount(string name, string id){
     for (int i = 0; i < bankAccounts.size(); i++){

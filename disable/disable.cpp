@@ -1,67 +1,54 @@
-#include <iostream>
-#include <string>
-#include <regex>
 #include "disable.h"
 
-using namespace std;
+bool Disable::startTransaction(User& user) {
+    string name;
+    string nameString;
+    string bankAccountID;
+    string bankAccountIDString;
+    Account account;
 
-class Disable {
-    public: Disable(){
-
-    }
-    private: bool isDisabled(StandardUser user){
-      if ( user == false){
-          cout<<"The user does not exist anymore"<<endl;
-      } else {
-          cout << " user still exists" <<endl;
-      }
-
-    }
-
-bool Disable::isValidAccountNumber(string accountNumber){
-
-    // Check if number is not null
-    if (accountNumber.empty()){
+    // Check If User Is Admin Session Before Proceeding
+    if (!user.isAdmin()){
+        cout << "ERROR: Transaction Error - Cannot access disable transaction from standard account!" << endl;
         return false;
     }
 
-    // Check if number is 1-5 characters long
-    if (accountNumber.length() > 5  accountNumber.length() < 1){
+    // User Input
+    cout << "Enter Account Holder’s Name:";
+    cin >> name;
+
+    cout << "Enter Account Number:";
+    cin >> bankAccountID;
+
+     // Validate User Input For Account
+    if (!isValidAccountNumber(bankAccountID)){
+        //Output error message indicating the lack of privileges
+        cout << "Error: Account number is invalid!" << endl;
         return false;
-    }
-
-    // Check if number is all integer digits
-    regex regexDigits("[0-9]+");
-    if (!regex_match(accountNumber, regexDigits)){
+    } else if(!isValidName(name)){
+        //Output error message indicating invalid info
+        cout << "Error: Account holders name is invalid!" << endl;
         return false;
-    }
+    } else{
+        // Convert transaction info to transaction string format
+        nameString = name;
+        bankAccountIDString = bankAccountID;
+        convertNameStringFormat(nameString);
+        convertAccountIDStringFormat(bankAccountIDString);
 
-    return true;
-} 
-
-
-bool Disable::startTransaction(StandardUser user) {
-    string holdersName;
-    string accountNum;
-    float depositAmount;
-
-    Account* accounts = user.getBankAccounts();
-    cout << "Enter account number: ";
-    cin >> accountNum;
-    if(isValidAccountNumber(accountNum, accounts)){
-        cout << "Enter deposit amount: ";
-        cin >> depositAmount;
-        int intAccNum = stoi(accountNum);
-        accounts[intAccNum].addBalance(depositAmount);
-        return true;
-    } 
-    return false;
-}
-
- private: bool isValidName(string name){
-             // Check if name is not null or empty string
-        if (name.empty()  name.compare("") == 0){
+        // Find User
+        if (!user.findAccount(nameString, bankAccountIDString)){
             return false;
         }
 
-};
+        // Get user account
+        account = user.getAccount(nameString, bankAccountIDString);
+
+        // Change Account Plan
+        disableAccount(account);
+    }
+}
+
+void Disable::disableAccount(Account& account){
+    account.disable();
+}

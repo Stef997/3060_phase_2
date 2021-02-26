@@ -19,6 +19,8 @@ class User: public Account {
         /*void setBankAccounts(Account* accounts);*/
         bool isAdmin();
         bool findAccount(string name, string id);
+        void createAccount(string name, float amount);
+        void deleteAccount(string name, string id);
         Account& getAccount(string name, string id);
 };
 

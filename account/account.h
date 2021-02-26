@@ -23,6 +23,7 @@ class Account {
         string getPlan();
         void changePlan();
         float getBalance();
+        void disable();
         void addBalance(float newBalance);
         void removeBalance(float newBalance);
     protected:

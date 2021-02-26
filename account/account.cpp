@@ -54,6 +54,10 @@ void Account::removeBalance(float amount){
     balance = balance - amount;
 }
 
+void Account::disable(){
+    status = "D";
+}
+
 string Account::getPlan() {
     return plan;
 }

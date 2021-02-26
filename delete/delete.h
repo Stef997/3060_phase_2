@@ -5,22 +5,18 @@
 #include <string>
 #include <regex>
 
+#include "../user/user.h"
+#include "../user/standardUser.h"
+#include "../account/account.h"
+#include "../transaction/transaction.h"
+
 using namespace std;
 
-class Delete {
-    // Attributes
-    private:
-
+class Delete : public Transaction {
     public:
-
-    // Methods
-    private:
-        bool isValidName(string name);
-        bool isValidAccountNumber(string number);
-    public:
-        Withdrawal();
-        void delete(int account);
-        bool startTransaction();
+        Delete();
+        void deleteAccount(string name, string id);
+        bool startTransaction(User& user);
 };
 
 #endif

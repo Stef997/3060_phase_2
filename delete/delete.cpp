@@ -4,71 +4,52 @@ Delete::Delete(){
 
 }
 
-bool Delete::startTransaction(StandardUser user){
+bool Delete::startTransaction(User& user){
     string name;
-    string accountNum;
+    string nameString;
+    string bankAccountID;
+    string bankAccountIDString;
+    Account account;
 
-    Account* accounts = user.getBankAccounts();
-    cout << "Enter account holder's name: ";
+    // Check If User Is Admin Session Before Proceeding
+    if (!user.isAdmin()){
+        cout << "ERROR: Transaction Error - Delete transaction cannot be accessed from a standard account" << endl;
+        return false;
+    }
+
+    // User Input
+    cout << "Enter Account Holder’s Name:";
     cin >> name;
 
-    cout << "Enter The Account Number";
-    cin >> accountNum;
+    cout << "Enter Account Number:";
+    cin >> bankAccountID;
 
-    if (!isValidAccountNumber(accountNum)){
-        cout << "Error";
+     // Validate User Input For Account
+    if (!isValidAccountNumber(bankAccountID)){
+        //Output error message indicating the lack of privileges
+        cout << "Error: Account number is invalid!" << endl;
+        return false;
     } else if(!isValidName(name)){
-        cout << "Error";
-    }  
-    else{
-        delete(accounts);
-    }
+        //Output error message indicating invalid info
+        cout << "Error: Account holders name is invalid!" << endl;
+        return false;
+    } else{
+        // Convert transaction info to transaction string format
+        nameString = name;
+        bankAccountIDString = bankAccountID;
+        convertNameStringFormat(nameString);
+        convertAccountIDStringFormat(bankAccountIDString);
 
+        // Find User
+        if (!user.findAccount(nameString, bankAccountIDString)){
+            return false;
+        }
+
+        // Delete Account
+        deleteAccount(name, bankAccountIDString);
+    }
 }
 
-void Delete::delete(int account){
-    //Withdraw backend stuff
-}
-
-bool Delete::isValidName(string name){
-    // Check if name is not null or empty string
-    if (name.empty() || name.compare("") == 0){
-        return false;
-    }
-
-    // Check if name is at most 20 characters long and at least 1 character long
-    if (name.length() > 20){
-        return false;
-    }
-
-    // Check if name does not contain digits or illegal characters
-    regex regexName("[^\\t\\n\\r\\f\\v0-9\\[\\]!@#$%^&*()_+{}|\\:;\"\'<,>.?/~`]+");
-    if (!regex_match(name, regexName)){
-        return false;
-    }
-
-    return true;
-}
-
-bool Delete::isValidAccountNumber(string accountNumber){
-
-    // Check if number is not null
-    if (accountNumber.empty()){
-        return false;
-    }
-
-    // Check if number is 1-5 characters long
-    if (accountNumber.length() > 5 || accountNumber.length() < 1){
-        return false;
-    }
-
-    // Check if number is all integer digits
-    regex regexDigits("[0-9]+");
-    if (!regex_match(accountNumber, regexDigits)){
-        return false;
-    }
-
-    // TODO: Check number exist in the data base
-
-    return true;
+void Delete::deleteAccount(string name, string id){
+    deleteAccount(name, id);
 }
