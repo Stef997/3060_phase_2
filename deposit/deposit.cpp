@@ -46,16 +46,18 @@ bool Deposit::startTransaction(User user) {
         // Convert transaction info to transaction string format
         bankAccountIDString = bankAccountID;
         amountString = amount;
+        nameString = name;
+        convertNameStringFormat(nameString);
         convertAccountIDStringFormat(bankAccountIDString);
         convertCurrencyStringFormat(amountString);
 
         // Find User
-        if (!user.findAccount(name, bankAccountIDString)){
+        if (!user.findAccount(nameString, bankAccountIDString)){
             return false;
         }
 
         // Get user account
-        account = user.getAccount(name, bankAccountIDString);
+        account = user.getAccount(nameString, bankAccountIDString);
     }
     
     // Validate User Input For Deposit
@@ -64,7 +66,7 @@ bool Deposit::startTransaction(User user) {
         return false;
     } else{
         // Deposit into user account
-        deposit(stof(amount), account);
+        deposit(stof(amountString), account);
     }
 
     return true;
