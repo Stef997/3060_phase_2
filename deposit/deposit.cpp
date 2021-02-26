@@ -9,7 +9,9 @@
 
 #include "deposit.h"
 
-bool Deposit::startTransaction(User user) {
+bool Deposit::startTransaction(User user){return true;}
+
+bool Deposit::startTransaction(StandardUser user) {
     string name;
     string nameString;
     string bankAccountID;

@@ -23,66 +23,71 @@ void Session::promptTransaction() {
 
     string newUser[2]; 
 
-    cout << "Enter Transaction: ";
-    cin >> actionName;
+    while(actionName != "logout") {
+        cout << "Enter Transaction: ";
+        cin >> actionName;
 
-    for(int i = 0; i < 10; i++) {
-        if(actionName.length() == transactionStr[i].length()) {
-            bool isAction = equal(actionName.begin(), actionName.end(),
-                                    transactionStr[i].begin(),
-                                    noCaseComp);
-            if(isAction) {
-                switch(i) {
-                    case 0:
-                       string* newUser;
-                       newUser = Login().login();
-                       isAdmin = equal(newUser[0].begin(), newUser[0].end(), sessionTypes[0].begin(), noCaseComp);
-                       isStandard = equal(newUser[0].begin(), newUser[0].end(), sessionTypes[1].begin(), noCaseComp);
-                       username = newUser[1];
-                       if(isAdmin) {
+        for(int i = 0; i < 10; i++) {
+            if(actionName.length() == transactionStr[i].length()) {
+                bool isAction = equal(actionName.begin(), actionName.end(),
+                                        transactionStr[i].begin(),
+                                        noCaseComp);
+                if(isAction) {
+                    switch(i) {
+                        case 0:
+                           string* newUser;
+                           newUser = Login().login();
+                           isAdmin = equal(newUser[0].begin(), newUser[0].end(), sessionTypes[0].begin(), noCaseComp);
+                           isStandard = equal(newUser[0].begin(), newUser[0].end(), sessionTypes[1].begin(), noCaseComp);
+                           username = newUser[1];
                            if(isAdmin) {
-                               AdminUser admin = AdminUser();
-                               admin.setAdmin();
-                               adminUser = admin;
+                               if(isAdmin) {
+                                   AdminUser admin = AdminUser();
+                                   admin.setAdmin();
+                                   adminUser = admin;
+                                   isAdminSession = true;
+                               }
+                           } else if (isStandard) {
+                               if(isStandard) {
+                                   StandardUser standard = StandardUser();
+                                   standard.setHoldersName(username);
+                                   standardUser = standard;
+                                   isAdminSession = false;
+                               }
                            }
-                       } else if (isStandard) {
-                           if(isStandard) {
-                               StandardUser standard = StandardUser();
-                               standard.setHoldersName(username);
-                               standardUser = standard;
-                           }
-                       }
-                       break;
-                    case 1:
-                       cout << "Logout not implemented" << endl;
-                       break;
-                    case 2:
-                       cout << "Withdrawal not implemented" << endl;
-                       break;
-                    case 3:
-                       cout << "Transfer not implemented" << endl;
-                       break;
-                    case 4:
-                       cout << "Paybill not implemented" << endl;
-                       break;
-                    case 5:
-                       cout << "Deposit not implemented" << endl;
-                       break;
-                    case 6:
-                       cout << "Create not implemented" << endl;
-                       break;
-                    case 7:
-                       cout << "Delete not implemented" << endl;
-                       break;
-                    case 8:
-                       cout << "Disable not implemented" << endl;
-                       break;
-                    case 9:
-                       cout << "Changeplan not implemented" << endl;
-                       break;
+                           break;
+                        case 1:
+                           cout << "Logout not implemented" << endl;
+                           break;
+                        case 2:
+                           cout << "Withdrawal not implemented" << endl;
+                           break;
+                        case 3:
+                           cout << "Transfer not implemented" << endl;
+                           break;
+                        case 4:
+                           cout << "Paybill not implemented" << endl;
+                           break;
+                        case 5:
+                           Deposit().startTransaction(standardUser);
+                           cout << "Deposit not implemented" << endl;
+                           break;
+                        case 6:
+                           cout << "Create not implemented" << endl;
+                           break;
+                        case 7:
+                           cout << "Delete not implemented" << endl;
+                           break;
+                        case 8:
+                           cout << "Disable not implemented" << endl;
+                           break;
+                        case 9:
+                           cout << "Changeplan not implemented" << endl;
+                           break;
+                    }
                 }
             }
-        }
+        }        
     }
 }
 
