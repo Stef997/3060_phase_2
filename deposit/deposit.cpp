@@ -11,7 +11,7 @@
 
 bool Deposit::startTransaction(User user){return true;}
 
-bool Deposit::startTransaction(AdminUser user) {
+bool Deposit::startTransaction(AdminUser& user) {
     string name;
     string nameString;
     string bankAccountID;
@@ -68,7 +68,7 @@ bool Deposit::startTransaction(AdminUser user) {
 
     return true;
 }
-bool Deposit::startTransaction(StandardUser user) {
+bool Deposit::startTransaction(StandardUser& user) {
     string name;
     string nameString;
     string bankAccountID;
@@ -78,7 +78,7 @@ bool Deposit::startTransaction(StandardUser user) {
     Account account;
 
     name = user.getName();
-    
+
     // User Input
     cout << "Enter account number to pay bill from:";
     cin >> bankAccountID;
@@ -111,6 +111,8 @@ bool Deposit::startTransaction(StandardUser user) {
 
         // Get user account
         account = user.getAccount(nameString, bankAccountIDString);
+        cout << "Deposit value: ";
+        cout << account.getBalance() << endl;
     }
     
     // Validate User Input For Deposit

@@ -76,7 +76,7 @@ void Session::promptTransaction() {
                            } else {
                                Deposit().startTransaction(standardUser);
                            }
-                           cout << standardUser.getBankAccounts().at(0).getBalance() << endl;
+                           cout << "Session value: " << standardUser.getBankAccounts().at(0).getBalance() << endl;
                            break;
                         case 6:
                            cout << "Create not implemented" << endl;

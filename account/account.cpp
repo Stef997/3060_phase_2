@@ -6,7 +6,7 @@
 
 Account::Account() {
     number = "00000";
-    balance = 0;
+    balance = 1;
     plan = "none";
     name = "John Doe";
     status = "A";
