@@ -174,7 +174,7 @@ bool Transaction::startTransaction(User user, string actionName) {
                                cout << "Admin not implemented" << endl;
                            } else {
                                cout << "Error: Not a valid account name" << endl;
-                           }*/
+                           }
                            break;
                         case 1:
                            cout << "Logout not implemented" << endl;

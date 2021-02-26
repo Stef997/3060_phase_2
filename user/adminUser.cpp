@@ -11,7 +11,11 @@ AdminUser::AdminUser() : User(){
 
 }
 
+void AdminUser::setAdmin(){
+   status = true;
+}
+
 bool AdminUser::isAdmin(){
-    return true;
+    return status;
 }
 

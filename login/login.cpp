@@ -1,22 +1,7 @@
 #include "login.h"
 
-bool Login::isValidName(string name) {
-   bool isValid = false;
-   regex regexp("[a-zA-Z-]+");
+Login::Login() : Transaction() {
 
-   if(name.length() < 20 && name.length() > 0) {
-       isValid = true;
-   } else {
-       isValid = false;
-   }
-   
-   if(regex_match(name, regexp)){
-       isValid = true;
-   } else {
-       isValid = false;
-   }
-
-   return isValid;
 }
 
 bool Login::noCaseComp(unsigned char a, unsigned char b) {
@@ -52,7 +37,12 @@ bool Login::isAdmin(string session) {
   return isAdmin;
 }
 
-string Login::startTransaction() {
+bool Login::startTransaction(User user) {
+	return true;
+}
+
+string* Login::login() {
+
     string username;
     string sessionType;
 
@@ -66,16 +56,15 @@ string Login::startTransaction() {
         cin >> username;
         bool isValid = isValidName(username);
         if(isValid) {
-            return username;
+            userVals[0] = sessionType;
+            userVals[1] = username;
+            return userVals;
         }
     } else {
-        return "admin";
+        userVals[0] = sessionType;
+        userVals[1] = "";
+        return userVals;
     }
    
-    return "none";
-}
-
-void Login::login(string sessionType) {
-    //Create/Retrieve user from inputted variable in startTransaction
-    //Return the user/assign the BankSession's current user 
+    return userVals;
 }

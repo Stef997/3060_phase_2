@@ -1,4 +1,4 @@
 CC=g++
 
-all: account/account.cpp bankTransaction/bankTransaction.cpp deposit/deposit.cpp login.cpp paybill/paybill.cpp transfer/transfer.cpp user/user.cpp bankSession/bankSession.cpp ChangePlan/changePlan.cpp main.cpp transaction/transaction.cpp transfer.cpp withdrawal/withdrawal.cpp
-	g++ account/account.cpp bankTransaction/bankTransaction.cpp deposit/deposit.cpp login.cpp paybill/paybill.cpp transfer/transfer.cpp user/user.cpp bankSession/bankSession.cpp ChangePlan/changePlan.cpp main.cpp transaction/transaction.cpp transfer.cpp withdrawal/withdrawal.cpp -o test
+all: main.cpp account/account.cpp transaction/transaction.cpp login/login.cpp user/user.cpp session/session.cpp main.cpp transaction/transaction.cpp user/adminUser.cpp user/standardUser.cpp
+	g++ main.cpp session/session.cpp transaction/transaction.cpp user/user.cpp login/login.cpp account/account.cpp user/adminUser.cpp user/standardUser.cpp -o test

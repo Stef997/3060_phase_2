@@ -16,7 +16,3 @@ string StandardUser::getHoldersName() {
 void StandardUser::setHoldersName(string newName) {
     holdersName = newName;
 }
-
-bool StandardUser::isAdmin(){
-    return false;
-}

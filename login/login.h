@@ -7,17 +7,19 @@
 #include "../user/user.h"
 #include "../user/standardUser.h"
 #include "../user/adminUser.h"
+#include "../transaction/transaction.h"
 
 using namespace std;
 
-class Login {
+class Login: public Transaction {
     private:
-        bool isValidName(string name);
         static bool noCaseComp(unsigned char a, unsigned char b);
         bool isAdmin(string session);
     public:
-        string startTransaction();
-        void login(string sessionType);
+        string userVals[2];
+        Login();
+        bool startTransaction(User user);
+        string* login();
 
 };
 

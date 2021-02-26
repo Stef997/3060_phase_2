@@ -9,8 +9,10 @@ using namespace std;
 
 class AdminUser: public User {
     private:
+        bool status = false;
     public:
         AdminUser();
+        void setAdmin();
         bool isAdmin();
     protected:  
 };

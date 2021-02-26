@@ -6,19 +6,19 @@
 #include "../user/user.h"
 #include "../user/adminUser.h"
 #include "../user/standardUser.h"
-#include "../bankTransaction/bankTransaction.h"
+#include "../transaction/transaction.h"
+#include "../login/login.h"
 
 using namespace std;
 
-class BankSession: public BankTransaction, public User {
+class Session: public User {
     private:
-        User user;
+        AdminUser adminUser;
+        StandardUser standardUser;
     public:
+        Session();
+        static bool noCaseComp(unsigned char a, unsigned char b);
         void promptTransaction();
-        BankSession();
-        bool checkPrivilege();
-        void setUser(User user);
-        User getUser();
 };
 
 #endif

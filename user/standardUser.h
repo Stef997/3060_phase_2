@@ -14,7 +14,6 @@ class StandardUser: public User {
         StandardUser();
         void setHoldersName(string newName);
         string getHoldersName();
-        bool isAdmin();
     protected:
 };
 

@@ -1,3 +1,6 @@
+#ifndef transaction_h_
+#define transaction_h_
+
 #include <iostream>
 #include <string>
 #include <regex>
@@ -10,12 +13,14 @@ using namespace std;
 
 class Transaction {
     protected:
+    public:
         bool isValidName(string name);
         bool isValidAccountNumber(string number);
         bool isValidAmount(string amount);
-    public:
         virtual bool startTransaction(User user) = 0;
         void convertAccountIDStringFormat(string& number);
         void convertCurrencyStringFormat(string& number);
         void convertNameStringFormat(string& name);
 };
+
+#endif
