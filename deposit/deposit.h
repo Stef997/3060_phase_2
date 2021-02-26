@@ -15,7 +15,8 @@ class Deposit: public Transaction {
         bool isValidAmount(string amount, Account account);
     public:
         bool startTransaction(User user);
-        bool startTransaction(StandardUser user);
+        bool startTransaction(AdminUser& user);
+        bool startTransaction(StandardUser& user);
         void deposit(float value, Account& account);
 };
 
