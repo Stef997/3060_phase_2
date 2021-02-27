@@ -1,21 +1,15 @@
 #include "delete.h"
 
-Delete::Delete(){
-
+bool Delete::startTransaction(StandardUser& user){
+    cout << "ERROR: Transaction Error - Delete transaction cannot be accessed from a standard account" << endl;
+    return false;
 }
 
-bool Delete::startTransaction(User& user){
+bool Delete::startTransaction(AdminUser& user){
     string name;
     string nameString;
     string bankAccountID;
     string bankAccountIDString;
-    Account account;
-
-    // Check If User Is Admin Session Before Proceeding
-    if (!user.isAdmin()){
-        cout << "ERROR: Transaction Error - Delete transaction cannot be accessed from a standard account" << endl;
-        return false;
-    }
 
     // User Input
     cout << "Enter Account Holder’s Name:";
@@ -41,15 +35,17 @@ bool Delete::startTransaction(User& user){
         convertAccountIDStringFormat(bankAccountIDString);
 
         // Find User
-        if (!user.findAccount(nameString, bankAccountIDString)){
+        if (!user.findAccount(name, bankAccountIDString)){
             return false;
         }
 
+        Account& account = user.getAccount(name, bankAccountIDString);
+
         // Delete Account
-        deleteAccount(name, bankAccountIDString);
+        deleteAccount(user, name, bankAccountIDString);
     }
 }
 
-void Delete::deleteAccount(string name, string id){
-    deleteAccount(name, id);
+void Delete::deleteAccount(AdminUser& user, string name, string id){
+    user.deleteAccount(name, id);
 }

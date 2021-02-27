@@ -1,17 +1,15 @@
 #include "disable.h"
 
-bool Disable::startTransaction(User& user) {
+bool Disable::startTransaction(StandardUser& user){
+    cout << "ERROR: Transaction Error - Cannot access disable transaction from standard account!" << endl;
+    return false;
+}
+
+bool Disable::startTransaction(AdminUser& user) {
     string name;
     string nameString;
     string bankAccountID;
     string bankAccountIDString;
-    Account account;
-
-    // Check If User Is Admin Session Before Proceeding
-    if (!user.isAdmin()){
-        cout << "ERROR: Transaction Error - Cannot access disable transaction from standard account!" << endl;
-        return false;
-    }
 
     // User Input
     cout << "Enter Account Holder’s Name:";
@@ -37,12 +35,12 @@ bool Disable::startTransaction(User& user) {
         convertAccountIDStringFormat(bankAccountIDString);
 
         // Find User
-        if (!user.findAccount(nameString, bankAccountIDString)){
+        if (!user.findAccount(name, bankAccountIDString)){
             return false;
         }
 
         // Get user account
-        account = user.getAccount(nameString, bankAccountIDString);
+        Account& account = user.getAccount(name, bankAccountIDString);
 
         // Change Account Plan
         disableAccount(account);

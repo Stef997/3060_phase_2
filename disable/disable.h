@@ -16,7 +16,8 @@ class Disable : public Transaction {
     public:
         Disable();
         void disableAccount(Account& account);
-        bool startTransaction(User& user);
+        bool startTransaction(AdminUser& user);
+        bool startTransaction(StandardUser& user);
 };
 
 #endif

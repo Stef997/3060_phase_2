@@ -14,7 +14,6 @@ bool ChangePlan::startTransaction(AdminUser& user){
     string nameString;
     string bankAccountID;
     string bankAccountIDString;
-    Account account;
 
     // User Input
     cout << "Enter Account Holder’s Name:";
@@ -40,12 +39,12 @@ bool ChangePlan::startTransaction(AdminUser& user){
         convertAccountIDStringFormat(bankAccountIDString);
 
         // Find User
-        if (!user.findAccount(nameString, bankAccountIDString)){
+        if (!user.findAccount(name, bankAccountIDString)){
             return false;
         }
 
         // Get user account
-        account = user.getAccount(nameString, bankAccountIDString);
+        Account& account = user.getAccount(name, bankAccountIDString);
 
         // Change Account Plan
         setPlan(account);

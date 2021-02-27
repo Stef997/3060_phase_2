@@ -1,21 +1,16 @@
 #include "create.h"
 
-Create::Create(){
-
+bool Create::startTransaction(AdminUser& user){
+    cout << "ERROR: Transaction Error - Delete transaction cannot be accessed from a standard account" << endl;
+    return false;
 }
 
-bool Create::startTransaction(User& user){
+bool Create::startTransaction(AdminUser& user){
     string name;
     string nameString;
     string amount;
     string amountString;
     Account account;
-
-    // Check If User Is Admin Session Before Proceeding
-    if (!user.isAdmin()){
-        cout << "ERROR: Transaction Error - Delete transaction cannot be accessed from a standard account" << endl;
-        return false;
-    }
 
     // User Input
     cout << "Enter Account Holder’s Name:";
@@ -45,7 +40,7 @@ bool Create::startTransaction(User& user){
     }
 }
 
-void Create::createAccount(User& user, string name, float amount){
+void Create::createAccount(AdminUser& user, string name, float amount){
     user.createAccount(name, amount);
 }
 
@@ -75,7 +70,7 @@ bool Create::isValidAmount(string amount){
     }
     
     //Check for the value amount on deposits
-    if (value >= 10000){
+    if (value >= 100000){
         return false;
     }
 

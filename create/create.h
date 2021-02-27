@@ -17,8 +17,9 @@ class Create : public Transaction{
         bool isValidAmount(string amount);
     public:
         Create();
-        void createAccount(User& user, string name, float amount);
-        bool startTransaction(User& user);
+        void createAccount(AdminUser& user, string name, float amount);
+        bool startTransaction(AdminUser& user);
+        bool startTransaction(StandardUser& user);
 };
 
 #endif

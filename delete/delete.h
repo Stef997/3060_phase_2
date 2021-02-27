@@ -14,9 +14,9 @@ using namespace std;
 
 class Delete : public Transaction {
     public:
-        Delete();
-        void deleteAccount(string name, string id);
-        bool startTransaction(User& user);
+        void deleteAccount(AdminUser& user, string name, string id);
+        bool startTransaction(AdminUser& user);
+        bool startTransaction(StandardUser& user);
 };
 
 #endif
