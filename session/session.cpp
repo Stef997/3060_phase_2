@@ -104,7 +104,14 @@ void Session::promptTransaction() {
                            cout << "Disable not implemented" << endl;
                            break;
                         case 9:
-                           cout << "Changeplan not implemented" << endl;
+                           if(isAdminSession) {
+                               if(adminUser.isAdmin() == true) {
+                                   ChangePlan().startTransaction(adminUser);
+                               }
+                           } else {
+                               ChangePlan().startTransaction(standardUser);
+                           }
+                           cout << standardUser.getBankAccounts()[0].getPlan();
                            break;
                     }
                 }

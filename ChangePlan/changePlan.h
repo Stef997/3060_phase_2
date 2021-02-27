@@ -12,11 +12,12 @@
 using namespace std;
 
 class ChangePlan : public Transaction{
+    private:
     public:
-        void setPlan(Account& account);
     private:
         bool startTransaction(AdminUser& user);
         bool startTransaction(StandardUser& user);
+        void setPlan(Account& account);
 };
 
 #endif

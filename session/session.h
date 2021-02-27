@@ -13,6 +13,7 @@
 #include "../withdrawal/withdrawal.h"
 #include "../paybill/paybill.h"
 #include "../transfer/transfer.h"
+#include "../ChangePlan/changePlan.h"
 
 using namespace std;
 
