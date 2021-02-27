@@ -18,7 +18,7 @@ class Withdrawal: public Transaction{
         bool isValidAmount(string amount);
     public:
         Withdrawal();
-        void withdraw(float amount);
+        void withdraw(float amount, Account& account);
         bool startTransaction(User user);
 };
 

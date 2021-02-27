@@ -59,7 +59,15 @@ void Session::promptTransaction() {
                            cout << "Logout not implemented" << endl;
                            break;
                         case 2:
-                           cout << "Withdrawal not implemented" << endl;
+                           if(isAdminSession) {
+                               if(adminUser.isAdmin() == true) {
+                                   Withdrawal().startTransaction(adminUser);
+                               }
+                           } else {
+                               Withdrawal().startTransaction(standardUser);
+                               cout << endl;
+                               cout << "Session standard user balance: " << standardUser.getBankAccounts().at(0).getBalance() << endl;
+                           }
                            break;
                         case 3:
                            cout << "Transfer not implemented" << endl;
@@ -74,7 +82,7 @@ void Session::promptTransaction() {
                                }
                            } else {
                                Deposit().startTransaction(standardUser);
-                               //cout << endl;
+                               //cout << endl
                                //cout << "Session standard user balance: " << standardUser.getBankAccounts().at(0).getBalance() << endl;
                            }
                            break;

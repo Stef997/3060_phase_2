@@ -18,14 +18,13 @@ bool Withdrawal::startTransaction(User user)
         cout << "Enter Account Holder’s Name:";
         cin >> name;
     }
-    else{
-        name = user.getName();
-    }
     */
     
+    name = user.getName();
+
     // TODO: Add enter user id in test code
     // User Input
-    cout << "Enter account number to pay bill from:";
+    cout << "Enter account number to withdraw from:";
     cin >> bankAccountID;
 
     cout << "Enter amount to withdraw:";
@@ -33,13 +32,16 @@ bool Withdrawal::startTransaction(User user)
     
     // Validate User Input
     if (!isValidAccountNumber(bankAccountID)){
-
+        cout << "Error: Value Error - Account number does not exist!" << endl;
     } else if(!isValidName(name)){
+        cout << "Error: Input Error - Account name does not belong to user!" << endl;
         return false;
     } else if(!isValidAmount(amount)){
+        cout << "Error: Value Error - Not a valid currency value!" << endl;
         return false;
     } else{
-        withdraw(stof(amount));
+        Account& account = user.getAccount(name, bankAccountID);
+        withdraw(stof(amount), account);
 
         // Convert transaction info to transaction string format
         bankAccountIDString = bankAccountID;
@@ -51,7 +53,8 @@ bool Withdrawal::startTransaction(User user)
 }
 
 //TODO: method should be private
-void Withdrawal::withdraw(float amount){
+void Withdrawal::withdraw(float amount, Account& account){
+    account.removeBalance(amount);
     //Withdraw backend stuff
 }
 
