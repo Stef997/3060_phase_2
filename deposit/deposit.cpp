@@ -9,6 +9,11 @@
 
 #include "deposit.h"
 
+/*
+ * This method takes an admin user object. It then prompts the 
+ * user for input, tests the input, and deposits the money into 
+ * the bank account if all inputs are valid.
+ */
 bool Deposit::startTransaction(AdminUser& user) {
     string name;
     string nameString;
@@ -72,6 +77,10 @@ bool Deposit::startTransaction(AdminUser& user) {
     return false;
 }
 
+/*
+ * This method takes a standard user object. It then prints an error 
+ * message for invalid privilege and returns false.
+ */
 bool Deposit::startTransaction(StandardUser& user) {
     string name;
     string nameString;
@@ -135,6 +144,10 @@ bool Deposit::startTransaction(StandardUser& user) {
     return false;
 }
 
+/*
+ * This method takes in a float values and Account object. 
+ * It then adds the float value to the balance of the account.
+ */
 //Apply changes to the account associated with the user
 void Deposit::deposit(float amount, Account& account){
     account.addBalance(amount);
@@ -142,7 +155,11 @@ void Deposit::deposit(float amount, Account& account){
     // TODO: back end stuff
 }
 
-
+/*
+ * This method takes in a string and account and checks if the string
+ * follows the requirements of deposit and does not go under or over 
+ * the boundaries of the account balance.
+*/
 // TODO: add user parameter and current balance parameter
 bool Deposit::isValidAmount(string amount, Account account){
 

@@ -1,10 +1,19 @@
 #include "delete.h"
 
+/*
+ * This method takes a standard user object. It then prints an error message
+ * for invalid privilege and returns false.
+ */
 bool Delete::startTransaction(StandardUser& user){
     cout << "ERROR: Transaction Error - Delete transaction cannot be accessed from a standard account" << endl;
     return false;
 }
 
+
+/*
+ * This method takes an admin user object. It then prompts the user for input, 
+ * tests the input, and deletes a new bank account if all inputs are valid.
+ */
 bool Delete::startTransaction(AdminUser& user){
     string name;
     string nameString;
@@ -46,6 +55,10 @@ bool Delete::startTransaction(AdminUser& user){
     }
 }
 
+/*
+ * This method takes in an admin user, the name of the account as a string, 
+ * and the id of the user. It then deletes the bank account.
+ */
 void Delete::deleteAccount(AdminUser& user, string name, string id){
     user.deleteAccount(name, id);
 }

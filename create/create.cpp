@@ -1,10 +1,19 @@
 #include "create.h"
 
-bool Create::startTransaction(AdminUser& user){
+
+/*
+ * his method takes a standard user object. It then prints an error 
+ * message for invalid privilege and returns false.
+ */
+bool Create::startTransaction(StandardUser& user){
     cout << "ERROR: Transaction Error - Delete transaction cannot be accessed from a standard account" << endl;
     return false;
 }
 
+/*
+ * This method takes an admin user object. It then prompts the user for input, 
+ * tests the input, and creates a new bank account if all inputs are valid.
+ */
 bool Create::startTransaction(AdminUser& user){
     string name;
     string nameString;
@@ -40,10 +49,18 @@ bool Create::startTransaction(AdminUser& user){
     }
 }
 
+/*
+ * This method takes in an admin user, the name of the account as a string, 
+ * and the initial balance as a float value. It then creates a bank account.
+ */
 void Create::createAccount(AdminUser& user, string name, float amount){
     user.createAccount(name, amount);
 }
 
+/*
+ * This method takes in a string and checks if the string follows the requirements
+ * of the initial balance and does not go under or over the boundaries of the account balance.
+ */
 bool Create::isValidAmount(string amount){
     if (!Transaction::isValidAmount(amount)){
         return false;
