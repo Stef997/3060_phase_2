@@ -18,7 +18,8 @@ class PayBill: public Transaction{
         bool isValidCompany(string company);
         bool isValidAmount(string amount, User& user, Account& account);
     public:
-        bool startTransaction(User& user);
+        bool startTransaction(AdminUser& user);
+        bool startTransaction(StandardUser& user);
         void payBill(float amount, Account& account); // TODO: This should be changed to private
 };
 

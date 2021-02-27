@@ -65,15 +65,20 @@ void Session::promptTransaction() {
                                }
                            } else {
                                Withdrawal().startTransaction(standardUser);
-                               cout << endl;
-                               cout << "Session standard user balance: " << standardUser.getBankAccounts().at(0).getBalance() << endl;
                            }
                            break;
                         case 3:
                            cout << "Transfer not implemented" << endl;
                            break;
                         case 4:
-                           cout << "Paybill not implemented" << endl;
+                           if(isAdminSession) {
+                               if(adminUser.isAdmin() == true) {
+                                   PayBill().startTransaction(adminUser);
+                               }
+                           } else {
+                               PayBill().startTransaction(standardUser);
+                           }
+                           cout << standardUser.getBankAccounts()[0].getBalance();
                            break;
                         case 5:
                            if(isAdminSession) {
@@ -82,8 +87,6 @@ void Session::promptTransaction() {
                                }
                            } else {
                                Deposit().startTransaction(standardUser);
-                               //cout << endl
-                               cout << "Session standard user balance: " << standardUser.getBankAccounts().at(0).getBalance() << endl;
                            }
                            break;
                         case 6:

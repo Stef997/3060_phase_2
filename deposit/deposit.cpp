@@ -26,7 +26,7 @@ bool Deposit::startTransaction(AdminUser& user) {
     }
 
     // User Input
-    cout << "Enter account number to pay bill from:";
+    cout << "Enter account number to deposit to:";
     cin >> bankAccountID;
 
     cout << "Enter amount to deposit:";

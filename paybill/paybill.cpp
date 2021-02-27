@@ -1,7 +1,6 @@
 #include "paybill.h"
 
-bool PayBill::startTransaction(User& user)
-{
+bool PayBill::startTransaction(AdminUser& user){
     string name;
     string nameString;
     string bankAccountID;
@@ -10,13 +9,8 @@ bool PayBill::startTransaction(User& user)
     string amount;
     string amountString;
 
-    if (user.isAdmin()){
-        cout << "Enter Account Holder’s Name:";
-        cin >> name;
-    }
-    else{
-        name = user.getName();
-    }
+    cout << "Enter Account Holder’s Name:";
+    cin >> name;
     
     // User Inputs
     cout << "Enter account number to pay bill from:";
@@ -36,6 +30,68 @@ bool PayBill::startTransaction(User& user)
     } else if(!isValidName(name)){
         //Output error message indicating invalid info
         cout << "Error: Account holders name is invalid!" << endl;
+        return false;
+    } else if(!isValidCompany(companyName)){
+
+    } else{
+        // Convert transaction info to transaction string format
+        bankAccountIDString = bankAccountID;
+        amountString = amount;
+        nameString = name;
+        convertNameStringFormat(nameString);
+        convertAccountIDStringFormat(bankAccountIDString);
+        convertCurrencyStringFormat(amountString);
+
+        // Find User
+        if (!user.findAccount(name, bankAccountID)){
+            return false;
+        }
+
+        // Get user account
+        Account& account = user.getAccount(name, bankAccountID);
+
+        // Validate User Input For PayBill
+        if(!isValidAmount(amount, user, account)){
+            cout << "ERROR: Value Error - Account name does not exist!" << endl;
+        } else{
+            payBill(stof(amount), account);
+        }
+        
+        return true;
+    }
+
+    return false;
+}
+
+bool PayBill::startTransaction(StandardUser& user){
+    string name;
+    string nameString;
+    string bankAccountID;
+    string bankAccountIDString;
+    string companyName;
+    string amount;
+    string amountString;
+
+    name = user.getName();
+    
+    // User Inputs
+    cout << "Enter account number to pay bill from:";
+    cin >> bankAccountID;
+
+    cout << "Enter the company to pay the bill to:";
+    cin >> companyName;
+
+    cout << "Enter amount to pay:";
+    cin >> amount;
+
+    // Validate User Input For Account
+    if (!isValidAccountNumber(bankAccountID)){
+        //Output error message indicating the lack of privileges
+        cout << "Error: Input Value - Account number is invalid!" << endl;
+        return false;
+    } else if(!isValidName(name)){
+        //Output error message indicating invalid info
+        cout << "Error: Input Value - Account holders name is invalid!" << endl;
         return false;
     } else if(!isValidCompany(companyName)){
 
@@ -108,7 +164,7 @@ bool PayBill::isValidAmount(string amount, User& user, Account& account){
         return false;
     }
     
-    if (value + account.getBalance() >= 100000){
+    if (value - account.getBalance() < 0){
         return false;
     }
 

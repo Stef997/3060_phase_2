@@ -8,16 +8,9 @@ bool Withdrawal::startTransaction(AdminUser& user) {
     string amount;
     string amountString;
 
-    if (user.isAdmin()){
-        cout << "Enter Account Holder’s Name:";
-        cin >> name;
-    }
-    else{
-        name = user.getName();
-    }
+    cout << "Enter Account Holder’s Name:";
+    cin >> name;
     
-    name = user.getName();
-
     // TODO: Add enter user id in test code
     // User Input
     cout << "Enter account number to withdraw from:";
@@ -67,14 +60,6 @@ bool Withdrawal::startTransaction(StandardUser& user) {
     string amount;
     string amountString;
 
-    if (user.isAdmin()){
-        cout << "Enter Account Holder’s Name:";
-        cin >> name;
-    }
-    else{
-        name = user.getName();
-    }
-    
     name = user.getName();
 
     // TODO: Add enter user id in test code

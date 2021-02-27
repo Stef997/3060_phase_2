@@ -11,6 +11,7 @@
 #include "../login/login.h"
 #include "../deposit/deposit.h"
 #include "../withdrawal/withdrawal.h"
+#include "../paybill/paybill.h"
 
 using namespace std;
 
