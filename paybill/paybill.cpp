@@ -1,10 +1,6 @@
 #include "paybill.h"
 
-PayBill::PayBill(){
-
-}
-
-bool PayBill::startTransaction(User user)
+bool PayBill::startTransaction(User& user)
 {
     string name;
     string nameString;
@@ -14,15 +10,13 @@ bool PayBill::startTransaction(User user)
     string amount;
     string amountString;
 
-    /* TODO: Implement user and check privilege
-    if (user == admin){
+    if (user.isAdmin()){
         cout << "Enter Account Holder’s Name:";
         cin >> name;
     }
     else{
         name = user.getName();
     }
-    */
     
     // User Inputs
     cout << "Enter account number to pay bill from:";
@@ -34,23 +28,40 @@ bool PayBill::startTransaction(User user)
     cout << "Enter amount to pay:";
     cin >> amount;
 
-    // Validate User Input
+    // Validate User Input For Account
     if (!isValidAccountNumber(bankAccountID)){
-
+        //Output error message indicating the lack of privileges
+        cout << "Error: Account number is invalid!" << endl;
+        return false;
     } else if(!isValidName(name)){
-
+        //Output error message indicating invalid info
+        cout << "Error: Account holders name is invalid!" << endl;
+        return false;
     } else if(!isValidCompany(companyName)){
 
-    } else if(!isValidAmount(amount)){
-        cout << "ERROR: Value Error - Account name does not exist!" << endl;
     } else{
-        payBill(stof(amount));
-
         // Convert transaction info to transaction string format
         bankAccountIDString = bankAccountID;
         amountString = amount;
+        nameString = name;
+        convertNameStringFormat(nameString);
         convertAccountIDStringFormat(bankAccountIDString);
         convertCurrencyStringFormat(amountString);
+
+        // Find User
+        if (!user.findAccount(name, bankAccountID)){
+            return false;
+        }
+
+        // Get user account
+        Account& account = user.getAccount(name, bankAccountID);
+
+        // Validate User Input For PayBill
+        if(!isValidAmount(amount, user, account)){
+            cout << "ERROR: Value Error - Account name does not exist!" << endl;
+        } else{
+            payBill(stof(amount), account);
+        }
         
         return true;
     }
@@ -59,7 +70,9 @@ bool PayBill::startTransaction(User user)
 }
 
 //TODO: method should be private
-void PayBill::payBill(float amount){
+void PayBill::payBill(float amount, Account& account){
+    account.removeBalance(amount);
+
     //PayBill backend stuff
 }
 
@@ -69,7 +82,7 @@ bool PayBill::isValidCompany(string company){
 }
 
 // TODO: add user parameter and current balance parameter
-bool PayBill::isValidAmount(string amount){
+bool PayBill::isValidAmount(string amount, User& user, Account& account){
     if (!Transaction::isValidAmount(amount)){
         return false;
     }
@@ -87,19 +100,17 @@ bool PayBill::isValidAmount(string amount){
     // convert to float value
     value = stof(amountWithNoDollarSign);
 
-    // Check if value is within boundaries 
-    /*if (standard && value >= 2000){
+    if (!user.isAdmin() && value >= 2000){
         return false;
     }
-    */
     
     if (value < 0){
         return false;
     }
     
-    /*if (value < balance){
-        return false
-    }*/
+    if (value + account.getBalance() >= 100000){
+        return false;
+    }
 
     return true;
 }

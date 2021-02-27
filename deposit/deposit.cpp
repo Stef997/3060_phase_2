@@ -57,6 +57,7 @@ bool Deposit::startTransaction(User& user) {
         }
         // Get user account
         Account& account = user.getAccount(name, bankAccountID);
+
         // Validate User Input For Deposit
         if(!isValidAmount(amount, account)){
             cout << "Error: invalid value amount!" << endl;
@@ -64,10 +65,11 @@ bool Deposit::startTransaction(User& user) {
         } else{
             // Deposit into user account
             deposit(stof(amountString), account);
+            return true;
         }
     }
     
-    return true;
+    return false;
 }
 
 //Apply changes to the account associated with the user

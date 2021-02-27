@@ -16,11 +16,10 @@ class PayBill: public Transaction{
     // Methods
     private:
         bool isValidCompany(string company);
-        bool isValidAmount(string amount);
+        bool isValidAmount(string amount, User& user, Account& account);
     public:
-        PayBill();
-        bool startTransaction(User user);
-        void payBill(float amount); // TODO: This should be changed to private
+        bool startTransaction(User& user);
+        void payBill(float amount, Account& account); // TODO: This should be changed to private
 };
 
 #endif
