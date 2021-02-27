@@ -53,11 +53,11 @@ bool PayBill::startTransaction(AdminUser& user){
         // Validate User Input For PayBill
         if(!isValidAmount(amount, user, account)){
             cout << "ERROR: Value Error - Account name does not exist!" << endl;
+            return false;
         } else{
             payBill(stof(amount), account);
+            return true;
         }
-        
-        return true;
     }
 
     return false;
@@ -115,11 +115,11 @@ bool PayBill::startTransaction(StandardUser& user){
         // Validate User Input For PayBill
         if(!isValidAmount(amount, user, account)){
             cout << "ERROR: Value Error - Account name does not exist!" << endl;
+            return false;
         } else{
             payBill(stof(amount), account);
+            return true;
         }
-        
-        return true;
     }
 
     return false;
@@ -163,8 +163,12 @@ bool PayBill::isValidAmount(string amount, User& user, Account& account){
     if (value < 0){
         return false;
     }
+
+    if (value >= 100000){
+        return false;
+    }
     
-    if (value - account.getBalance() < 0){
+    if (account.getBalance() - value < 0){
         return false;
     }
 
