@@ -1,25 +1,20 @@
 #include "changePlan.h"
 
-ChangePlan::ChangePlan(){
-
-}
-
 void ChangePlan::setPlan(Account& account){
     account.changePlan();
 }
 
-bool ChangePlan::startTransaction(User user){
+bool ChangePlan::startTransaction(StandardUser& user){
+    cout << "ERROR: Transaction Error: Cannot access the change plan transaction" << endl;
+    return false;
+}
+
+bool ChangePlan::startTransaction(AdminUser& user){
     string name;
     string nameString;
     string bankAccountID;
     string bankAccountIDString;
     Account account;
-
-    // Check If User Is Admin Session Before Proceeding
-    if (!user.isAdmin()){
-        cout << "ERROR: Transaction Error: Cannot access the change plan transaction" << endl;
-        return false;
-    }
 
     // User Input
     cout << "Enter Account Holder’s Name:";

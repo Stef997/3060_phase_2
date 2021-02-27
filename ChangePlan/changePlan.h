@@ -13,10 +13,10 @@ using namespace std;
 
 class ChangePlan : public Transaction{
     public:
-        ChangePlan();
         void setPlan(Account& account);
     private:
-        bool startTransaction(User user);
+        bool startTransaction(AdminUser& user);
+        bool startTransaction(StandardUser& user);
 };
 
 #endif
