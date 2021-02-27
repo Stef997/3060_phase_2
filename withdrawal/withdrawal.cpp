@@ -1,10 +1,6 @@
 #include "withdrawal.h"
 
-Withdrawal::Withdrawal(){
-
-}
-
-bool Withdrawal::startTransaction(User user)
+bool Withdrawal::startTransaction(User& user)
 {
     string name;
     string nameString;
@@ -13,12 +9,13 @@ bool Withdrawal::startTransaction(User user)
     string amount;
     string amountString;
 
-    /* TODO: Implement user and check privilege
-    if (user == admin){
+    if (user.isAdmin()){
         cout << "Enter Account Holder’s Name:";
         cin >> name;
     }
-    */
+    else{
+        name = user.getName();
+    }
     
     name = user.getName();
 
@@ -36,18 +33,30 @@ bool Withdrawal::startTransaction(User user)
     } else if(!isValidName(name)){
         cout << "Error: Input Error - Account name does not belong to user!" << endl;
         return false;
-    } else if(!isValidAmount(amount)){
-        cout << "Error: Value Error - Not a valid currency value!" << endl;
-        return false;
     } else{
-        Account& account = user.getAccount(name, bankAccountID);
-        withdraw(stof(amount), account);
-
         // Convert transaction info to transaction string format
         bankAccountIDString = bankAccountID;
         amountString = amount;
+        nameString = name;
+        convertNameStringFormat(nameString);
         convertAccountIDStringFormat(bankAccountIDString);
         convertCurrencyStringFormat(amountString);
+
+        // Find User
+        if (!user.findAccount(name, bankAccountID)){
+            return false;
+        }
+        // Get user account
+        Account& account = user.getAccount(name, bankAccountID);
+        
+        // Validate User Input For withdrawal
+        if(!isValidAmount(amount, user, account)){
+            cout << "Error: Value Error - Not a valid currency value!" << endl;
+            return false;
+        }
+        else{
+            withdraw(stof(amountString), account);
+        }
     }
     return true;
 }
@@ -55,11 +64,10 @@ bool Withdrawal::startTransaction(User user)
 //TODO: method should be private
 void Withdrawal::withdraw(float amount, Account& account){
     account.removeBalance(amount);
-    //Withdraw backend stuff
 }
 
 // TODO: add user parameter and current balance parameter
-bool Withdrawal::isValidAmount(string amount){
+bool Withdrawal::isValidAmount(string amount, User& user, Account& account){
 
     if (!Transaction::isValidAmount(amount)){
         return false;
@@ -79,18 +87,17 @@ bool Withdrawal::isValidAmount(string amount){
     value = stof(amountWithNoDollarSign);
 
     // Check if value is within boundaries 
-    /*if (standard && value >= 2000){
+    if (!user.isAdmin() && value >= 2000){
         return false;
     }
-    */
     
     if (value < 0){
         return false;
     }
     
-    /*if (value < balance){
-        return false
-    }*/
+    if (value + account.getBalance() >= 100000){
+        return false;
+    }
 
     return true;
 }

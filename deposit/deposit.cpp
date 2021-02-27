@@ -9,7 +9,7 @@
 
 #include "deposit.h"
 
-bool Deposit::startTransaction(AdminUser& user) {
+bool Deposit::startTransaction(User& user) {
     string name;
     string nameString;
     string bankAccountID;
@@ -17,63 +17,13 @@ bool Deposit::startTransaction(AdminUser& user) {
     string amount;
     string amountString;
 
-    cout << "Enter Account Holder’s Name:";
-    cin >> name;
-
-    // User Input
-    cout << "Enter account number to pay bill from:";
-    cin >> bankAccountID;
-
-    cout << "Enter amount to deposit:";
-    cin >> amount;
-
-    
-    // Validate User Input For Account
-    if (!isValidAccountNumber(bankAccountID)){
-        //Output error message indicating the lack of privileges
-        cout << "Error: Account number is invalid!" << endl;
-        return false;
-    } else if(!isValidName(name)){
-        //Output error message indicating invalid info
-        cout << "Error: Account holders name is invalid!" << endl;
-        return false;
-    } else{
-        // Convert transaction info to transaction string format
-        bankAccountIDString = bankAccountID;
-        amountString = amount;
-        nameString = name;
-        convertNameStringFormat(nameString);
-        convertAccountIDStringFormat(bankAccountIDString);
-        convertCurrencyStringFormat(amountString);
-
-        // Find User
-        if (!user.findAccount(name, bankAccountID)){
-            return false;
-        }
-        // Get user account
-        Account& account = user.getAccount(name, bankAccountID);
-        // Validate User Input For Deposit
-        if(!isValidAmount(amount, account)){
-            cout << "Error: invalid value amount!" << endl;
-            return false;
-        } else{
-            // Deposit into user account
-            deposit(stof(amountString), account);
-        }
+    if (user.isAdmin()){
+        cout << "Enter Account Holder’s Name:";
+        cin >> name;
     }
-    
-    return true;
-}
-
-bool Deposit::startTransaction(StandardUser& user) {
-    string name;
-    string nameString;
-    string bankAccountID;
-    string bankAccountIDString;
-    string amount;
-    string amountString;
-
-    name = user.getName();
+    else{
+        name = user.getName();
+    }
 
     // User Input
     cout << "Enter account number to pay bill from:";

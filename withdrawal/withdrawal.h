@@ -15,11 +15,10 @@ using namespace std;
 class Withdrawal: public Transaction{
     // Methods
     private:
-        bool isValidAmount(string amount);
+        bool isValidAmount(string amount, User& user, Account& account);
     public:
-        Withdrawal();
         void withdraw(float amount, Account& account);
-        bool startTransaction(User user);
+        bool startTransaction(User& user);
 };
 
 #endif
