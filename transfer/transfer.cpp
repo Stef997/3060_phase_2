@@ -1,11 +1,15 @@
 #include "transfer.h"
 
+//Mutator function modifying the account fields of a second account’s balance with passed in 
+//account and subtracting the amount from the account balance
 void Transfer::transfer(float amount, Account& account1, Account& account2)
 {
     account2.removeBalance(amount);
     account1.addBalance(amount);
 }
 
+//Start of  the transaction logic where the inputs are prompted for to the user and the 
+//transfer function is fired depending on correct inputs
 bool Transfer::startTransaction(AdminUser& user){
     string name;
     string nameString;
@@ -78,6 +82,8 @@ bool Transfer::startTransaction(AdminUser& user){
     return false;
 }
 
+//Start of  the transaction logic where the inputs are prompted for to the user and the transfer 
+//function is fired depending on correct inputs
 bool Transfer::startTransaction(StandardUser& user){
     string name;
     string nameString;
@@ -152,7 +158,7 @@ bool Transfer::startTransaction(StandardUser& user){
 }
 
 
-// TODO: add user parameter and current balance parameter
+//Checks the input for correct formatting necessary for actions in the withdrawal class
 bool Transfer::isValidAmount(string amount, User& user, Account& account1, Account& account2){
     if (!Transaction::isValidAmount(amount)){
         return false;

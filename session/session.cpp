@@ -5,10 +5,12 @@
 
 #include "session.h"
 
+//Comparison function meant to compare two strings independent of case
 bool Session::noCaseComp(unsigned char a, unsigned char b) {
     return tolower(a) == tolower(b);
 }
 
+//This method prompts the user to input the Transaction they would like to execute
 void Session::promptTransaction() {
     string actionName;
     string username;
@@ -120,6 +122,7 @@ void Session::promptTransaction() {
     }
 }
 
+//Constructor that initializes the BankSession object
 Session::Session() {
     promptTransaction();
 }

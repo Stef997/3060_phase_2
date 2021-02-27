@@ -1,13 +1,16 @@
 #include "login.h"
 
+//Constructor that initializes the Login object
 Login::Login() : Transaction() {
 
 }
 
+//Comparison function meant to compare two strings independent of case
 bool Login::noCaseComp(unsigned char a, unsigned char b) {
     return tolower(a) == tolower(b);
 }
 
+//Logs the user in as admin
 bool Login::isAdmin(string session) {
      bool isAdmin = false;
 
@@ -37,10 +40,13 @@ bool Login::isAdmin(string session) {
   return isAdmin;
 }
 
+//This method overrides the startTransaction method, that takes in a user object and starts 
+//the login transaction. Logs user in as standard
 bool Login::startTransaction(User user) {
 	return true;
 }
 
+//Creates the new session user with the required input variables inputted from the user
 string* Login::login() {
 
     string username;

@@ -1,5 +1,7 @@
 #include "withdrawal.h"
 
+//Start of  the transaction logic where the inputs are prompted for to the user and the 
+//withdraw function is fired depending on correct inputs
 bool Withdrawal::startTransaction(AdminUser& user) {
     string name;
     string nameString;
@@ -53,6 +55,9 @@ bool Withdrawal::startTransaction(AdminUser& user) {
     }
     return false;
 }
+
+//Start of the transaction logic where the inputs are prompted for to the user and
+//the withdraw function is fired depending on correct inputs
 bool Withdrawal::startTransaction(StandardUser& user) {
     string name;
     string nameString;
@@ -106,12 +111,13 @@ bool Withdrawal::startTransaction(StandardUser& user) {
     return false;
 }
 
-//TODO: method should be private
+//Mutator function modifying the account fields of the passed in account and 
+//subtracting the amount from the account balance
 void Withdrawal::withdraw(float amount, Account& account){
     account.removeBalance(amount);
 }
 
-// TODO: add user parameter and current balance parameter
+//Checks the input for correct formatting necessary for actions in the withdrawal class
 bool Withdrawal::isValidAmount(string amount, User& user, Account& account){
 
     if (!Transaction::isValidAmount(amount)){

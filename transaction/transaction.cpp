@@ -1,6 +1,6 @@
 #include "transaction.h"
 
-//TODO: change int to string in UML
+//Comparison function checking if the number string matches a predefined regex for account number
 bool Transaction::isValidAccountNumber(string accountNumber){
 
     // Check if number is not null
@@ -24,6 +24,7 @@ bool Transaction::isValidAccountNumber(string accountNumber){
     return true;
 }
 
+//Comparison function checking if the name string matches a predefined regex for account names
 bool Transaction::isValidName(string name){
     // Check if name is not null or empty string
     if (name.empty() || name.compare("") == 0){
@@ -44,7 +45,7 @@ bool Transaction::isValidName(string name){
     return true;
 }
 
-
+//Converts the name into the proper format intended for printout to bank transaction file
 void Transaction::convertNameStringFormat(string& name){
     int iteration = 20 - name.length();
 
@@ -53,6 +54,7 @@ void Transaction::convertNameStringFormat(string& name){
     }
 }
 
+//Converts the currency string into the proper format intended for printout to bank transaction file
 void Transaction::convertAccountIDStringFormat(string& number){
     while(number.length() < 5)
     {
@@ -60,6 +62,7 @@ void Transaction::convertAccountIDStringFormat(string& number){
     }
 }
 
+//Converts the account ID into the proper format intended for printout to bank transaction file
 void Transaction::convertCurrencyStringFormat(string& number){
     int periodPos = number.find(".");
     int decimalZeros;
@@ -91,7 +94,7 @@ void Transaction::convertCurrencyStringFormat(string& number){
     }
 }
 
-// TODO: add user parameter and current balance parameter
+//Comparison function checking if the value string matches a predefined regex for value amount strings
 bool Transaction::isValidAmount(string amount){
     // Check if number is all integer digits and proper currency float value
     regex regexDigits("^([$]?[0-9]+[.,]?[0-9]{0,2})$", regex::extended);
