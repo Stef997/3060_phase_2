@@ -48,9 +48,10 @@ bool Withdrawal::startTransaction(AdminUser& user) {
         }
         else{
             withdraw(stof(amountString), account);
+            return true;
         }
     }
-    return true;
+    return false;
 }
 bool Withdrawal::startTransaction(StandardUser& user) {
     string name;
@@ -99,9 +100,10 @@ bool Withdrawal::startTransaction(StandardUser& user) {
         }
         else{
             withdraw(stof(amountString), account);
+            return true;
         }
     }
-    return true;
+    return false;
 }
 
 //TODO: method should be private
@@ -137,8 +139,12 @@ bool Withdrawal::isValidAmount(string amount, User& user, Account& account){
     if (value < 0){
         return false;
     }
+
+    if (value >= 100000){
+        return false;
+    }
     
-    if (value + account.getBalance() >= 100000){
+    if (account.getBalance() - value < 0){
         return false;
     }
 
