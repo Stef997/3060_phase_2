@@ -2,8 +2,8 @@
 
 void Transfer::transfer(float amount, Account& account1, Account& account2)
 {
-    account1.addBalance(amount);
     account2.removeBalance(amount);
+    account1.addBalance(amount);
 }
 
 bool Transfer::startTransaction(AdminUser& user){

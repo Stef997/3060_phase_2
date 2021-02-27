@@ -1,5 +1,5 @@
-#ifndef paybill_h_
-#define paybill_h_
+#ifndef transfer_h_
+#define transfer_h_
 
 #include <iostream>
 #include <string>
