@@ -12,6 +12,11 @@
 
 using namespace std;
 
+/*
+ * This class inherits transaction and is responsible 
+ * of creating a new bank account
+ */
+
 class Create : public Transaction{
     private:
         bool isValidAmount(string amount);

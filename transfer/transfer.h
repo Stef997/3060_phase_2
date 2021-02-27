@@ -12,6 +12,11 @@
 
 using namespace std;
 
+/*
+ * This class inherits transaction and is responsible 
+ * of transfering money from a bank account to another bank account
+ */
+
 class Transfer: public Transaction{
     // Methods
     private:

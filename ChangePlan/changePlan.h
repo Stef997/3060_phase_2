@@ -11,9 +11,12 @@
 
 using namespace std;
 
+/*
+ * This class inherits transaction and is responsible 
+ * of changing the payment plan of the account
+ */
+
 class ChangePlan : public Transaction{
-    private:
-    public:
     private:
         bool startTransaction(AdminUser& user);
         bool startTransaction(StandardUser& user);

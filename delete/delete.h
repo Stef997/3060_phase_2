@@ -12,6 +12,11 @@
 
 using namespace std;
 
+/*
+ * This class inherits transaction and is responsible 
+ * of deleting a bank account
+ */
+
 class Delete : public Transaction {
     public:
         void deleteAccount(AdminUser& user, string name, string id);
