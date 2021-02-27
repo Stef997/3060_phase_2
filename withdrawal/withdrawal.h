@@ -18,7 +18,8 @@ class Withdrawal: public Transaction{
         bool isValidAmount(string amount, User& user, Account& account);
     public:
         void withdraw(float amount, Account& account);
-        bool startTransaction(User& user);
+        bool startTransaction(AdminUser& user);
+        bool startTransaction(StandardUser& user);
 };
 
 #endif

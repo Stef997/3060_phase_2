@@ -1,7 +1,65 @@
 #include "withdrawal.h"
 
-bool Withdrawal::startTransaction(User& user)
-{
+bool Withdrawal::startTransaction(AdminUser& user) {
+    string name;
+    string nameString;
+    string bankAccountID;
+    string bankAccountIDString;
+    string amount;
+    string amountString;
+
+    if (user.isAdmin()){
+        cout << "Enter Account Holder’s Name:";
+        cin >> name;
+    }
+    else{
+        name = user.getName();
+    }
+    
+    name = user.getName();
+
+    // TODO: Add enter user id in test code
+    // User Input
+    cout << "Enter account number to withdraw from:";
+    cin >> bankAccountID;
+
+    cout << "Enter amount to withdraw:";
+    cin >> amount;
+    
+    // Validate User Input
+    if (!isValidAccountNumber(bankAccountID)){
+        cout << "Error: Value Error - Account number does not exist!" << endl;
+    } else if(!isValidName(name)){
+        cout << "Error: Input Error - Account name does not belong to user!" << endl;
+        return false;
+    } else{
+        // Convert transaction info to transaction string format
+        bankAccountIDString = bankAccountID;
+        amountString = amount;
+        nameString = name;
+        convertNameStringFormat(nameString);
+        convertAccountIDStringFormat(bankAccountIDString);
+        convertCurrencyStringFormat(amountString);
+
+        // Find User
+        if (!user.findAccount(name, bankAccountID)){
+            return false;
+        }
+        // Get user account
+        Account& account = user.getAccount(name, bankAccountID);
+        
+        // Validate User Input For withdrawal
+        if(!isValidAmount(amount, user, account)){
+            cout << "Error: Value Error - Not a valid currency value!" << endl;
+            return false;
+        }
+        else{
+            withdraw(stof(amountString), account);
+        }
+    }
+    return true;
+}
+bool Withdrawal::startTransaction(StandardUser& user) {
     string name;
     string nameString;
     string bankAccountID;
