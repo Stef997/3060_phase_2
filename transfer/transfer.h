@@ -15,11 +15,11 @@ using namespace std;
 class Transfer: public Transaction{
     // Methods
     private:
-        bool isValidAmount(string amount);
+        bool isValidAmount(string amount, User& user, Account& account1, Account& account2);
     public:
-        Transfer();
-        void transfer(float amount);
-        bool startTransaction(User user);
+        void transfer(float amount, Account& account1, Account& account2);
+        bool startTransaction(AdminUser& user);
+        bool startTransaction(StandardUser& user);
 };
 
 #endif
