@@ -1,3 +1,7 @@
+/*
+* A pay bill class which subtracts the neccessary amount from balance to pay a selected choice of companies
+*/
+
 #include "paybill.h"
 
 bool PayBill::startTransaction(AdminUser& user){

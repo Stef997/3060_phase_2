@@ -1,7 +1,6 @@
 /*
- * A c++ implementation of a class to represent a user of a
- * bank session within an ATM banking system.
- */
+* A user class intended to store the accounts of an individual along with identifying the owner of the session
+*/
 
 #include "user.h"
 

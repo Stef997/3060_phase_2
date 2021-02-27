@@ -1,3 +1,7 @@
+*
+* A class representing an atmoic transaction that will modify a users accounts and persist the changes
+*/
+
 #include "transaction.h"
 
 //Comparison function checking if the number string matches a predefined regex for account number

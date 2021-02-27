@@ -1,3 +1,7 @@
+/*
+* A class that inherits the transaction class and performs an atomic operation to transfer funds to a new/separate account
+*/
+
 #include "transfer.h"
 
 //Mutator function modifying the account fields of a second account’s balance with passed in 

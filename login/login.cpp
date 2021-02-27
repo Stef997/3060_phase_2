@@ -1,3 +1,7 @@
+/*
+* A an atomic login transaction which creates the bank session user and connects the user with the accounts
+*/
+
 #include "login.h"
 
 //Constructor that initializes the Login object

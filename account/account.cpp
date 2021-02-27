@@ -1,6 +1,6 @@
 /*
- *
- */
+* Class containing the account of a user with fields intended for modifications by the ATM system
+*/
 
 #include "account.h"
 

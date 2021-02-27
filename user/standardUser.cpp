@@ -1,7 +1,6 @@
 /*
- *
- *
- */
+* An implementation of user that is lacking admin privleges and has the name set as a field
+*/
 
 #include "standardUser.h"
 
